@@ -8,3 +8,7 @@ bootstrap = Bootstrap(app)
 @app.route('/')
 def index():
     return render_template('base.html')
+
+@app.route('/test')
+def test():
+    return render_template('test.html')

@@ -1,3 +1,6 @@
 flask
 flask-bootstrap
+flask-migrate
+flask-sqlalchemy
 gunicorn
+pydantic

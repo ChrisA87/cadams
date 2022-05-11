@@ -11,9 +11,6 @@ def create_app(config_name='default'):
     app.config.from_object(config[config_name])
     config[config_name].init_app(app)
 
-    # Initiate extensions
-
-
     # Register Blueprints
     app.register_blueprint(main)
 

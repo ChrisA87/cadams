@@ -1,4 +1,7 @@
-default: lint test
+.PHONY: test lint
+
+default:
+	lint test
 
 pip:
 	pip install pip-tools

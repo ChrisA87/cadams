@@ -6,6 +6,8 @@
 #
 attrs==21.4.0
     # via pytest
+coverage==6.3.2
+    # via -r dev-requirements.in
 flake8==4.0.1
     # via -r dev-requirements.in
 iniconfig==1.1.1

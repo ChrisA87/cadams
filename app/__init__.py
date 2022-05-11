@@ -1,18 +1,22 @@
-from tempfile import tempdir
-from flask import Flask, render_template
+from flask import Flask
 from flask_bootstrap import Bootstrap
+from .main import main
+from config import config
+
+bootstrap = Bootstrap()
+
 
 def create_app(config_name='default'):
 
     app = Flask(__name__)
-    bootstrap = Bootstrap(app)
 
-    @app.route('/')
-    def index():
-        return render_template('base.html')
+    # Configure
+    app.config.from_object(config[config_name])
 
-    @app.route('/test')
-    def test():
-        return render_template('test.html')
-    
+    # Initiate extensions
+    bootstrap.init_app(app)
+
+    # Register Blueprints
+    app.register_blueprint(main)
+
     return app

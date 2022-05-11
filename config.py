@@ -3,22 +3,26 @@ from pydantic import BaseSettings
 
 class Config(BaseSettings):
     # TODO
-    pass
+    name: str = 'common'
+
+    @staticmethod
+    def init_app(app):
+        pass
 
 
 class DevConfig(Config):
     # TODO
-    pass
+    name: str = 'dev'
 
 
 class TestConfig(Config):
     # TODO
-    pass
+    name: str = 'test'
 
 
 class ProdConfig(Config):
     # TODO
-    pass
+    name: str = 'production'
 
 
 config = {

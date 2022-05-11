@@ -12,6 +12,7 @@ def create_app(config_name='default'):
 
     # Configure
     app.config.from_object(config[config_name])
+    config[config_name].init_app(app)
 
     # Initiate extensions
     bootstrap.init_app(app)

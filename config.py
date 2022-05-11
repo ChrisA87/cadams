@@ -2,8 +2,7 @@ from pydantic import BaseSettings
 
 
 class Config(BaseSettings):
-    # TODO
-    name: str = 'common'
+    SECRET_KEY: str = 'real-secret-key'
 
     @staticmethod
     def init_app(app):
@@ -11,18 +10,18 @@ class Config(BaseSettings):
 
 
 class DevConfig(Config):
-    # TODO
-    name: str = 'dev'
+    FLASK_ENV: str = 'development'
+    FLASK_DEBUG: bool = True
+    TEMPLATES_AUTO_RELOAD: bool = True
 
 
 class TestConfig(Config):
-    # TODO
-    name: str = 'test'
+    FLASK_ENV: str = 'testing'
+    TESTING: bool = True
 
 
 class ProdConfig(Config):
-    # TODO
-    name: str = 'production'
+    FLASK_ENV: str = 'production'
 
 
 config = {

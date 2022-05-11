@@ -1,7 +1,6 @@
 .PHONY: test lint
 
-default:
-	lint test
+default: lint test
 
 pip:
 	pip install pip-tools
@@ -13,4 +12,5 @@ lint:
 	flake8 . --count --max-complexity=10 --max-line-length=127 --statistics
 
 test:
-	pytest tests
+	coverage run --source app -m pytest tests
+	coverage report

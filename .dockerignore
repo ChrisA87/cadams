@@ -1,0 +1,12 @@
+# comment
+*/temp*
+*/*/temp*
+temp?
+
+# custom
+*/migrations
+*/data
+*/htmlcov
+*/.vscode
+*/.pytest_cache
+.coverage

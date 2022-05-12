@@ -13,18 +13,23 @@ flask==2.1.2
     #   -r requirements.in
     #   flask-migrate
     #   flask-sqlalchemy
+    #   flask-wtf
 flask-migrate==3.1.0
     # via -r requirements.in
 flask-sqlalchemy==2.5.1
     # via
     #   -r requirements.in
     #   flask-migrate
+flask-wtf==1.0.1
+    # via -r requirements.in
 greenlet==1.1.2
     # via sqlalchemy
 gunicorn==20.1.0
     # via -r requirements.in
 itsdangerous==2.1.2
-    # via flask
+    # via
+    #   flask
+    #   flask-wtf
 jinja2==3.1.2
     # via flask
 mako==1.2.0
@@ -33,6 +38,7 @@ markupsafe==2.1.1
     # via
     #   jinja2
     #   mako
+    #   wtforms
 pydantic==1.9.0
     # via -r requirements.in
 sqlalchemy==1.4.36
@@ -43,6 +49,8 @@ typing-extensions==4.2.0
     # via pydantic
 werkzeug==2.1.2
     # via flask
+wtforms==3.0.1
+    # via flask-wtf
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools

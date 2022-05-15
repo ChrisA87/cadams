@@ -4,7 +4,7 @@ from app.models.users import User
 
 @pytest.fixture
 def users():
-    yield User(name='Bob'), User(name='Bill')
+    yield User(username='Bob'), User(username='Bill')
 
 
 def test_cant_read_user_password(users):

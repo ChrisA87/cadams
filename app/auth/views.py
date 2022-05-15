@@ -4,6 +4,7 @@ from . import auth
 from .forms import LoginForm
 from ..models.users import User
 
+
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()

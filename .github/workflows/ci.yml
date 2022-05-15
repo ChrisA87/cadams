@@ -34,4 +34,8 @@ jobs:
         make lint
     - name: Test with pytest
       run: |
-        make test
+        coverage run --source app/ -m pytest tests/
+
+    - name: Coverage Report
+      run: |
+        coverage report

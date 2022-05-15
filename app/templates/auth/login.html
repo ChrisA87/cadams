@@ -15,4 +15,8 @@
             {{ form.submit(class="btn-primary")}}
         </form>
     </div>
-    {% endblock %}
+    <p>
+        Need to register?
+        <a href="{{ url_for('auth.register') }}">Sign up here</a>
+    </p>
+ {% endblock %}

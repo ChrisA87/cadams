@@ -6,5 +6,6 @@ COPY . /app
 
 RUN pip install -r requirements.txt
 
-# gunicorn --worker-tmp-dir /dev/shm --config gunicorn_config.py app.app:app
+ENV FLASK_APP run_app.py
+
 ENTRYPOINT [ "gunicorn", "--worker-tmp-dir", "/dev/shm", "--config", "gunicorn_config.py", "run_app:app"]

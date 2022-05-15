@@ -15,16 +15,23 @@ def app():
 def client(app):
     yield app.test_client()
 
+@pytest.fixture
+def list_users():
+    yield [
+        User(name='John', password='cat'),
+        User(name='Susan', password='dog'),
+        User(name='Bob', password='rabbit')
+    ]
+
 
 @pytest.fixture
-def test_db(app):
+def test_db(app, list_users):
     context = app.app_context()
     context.push()
     db.create_all()
 
     # Import test data
-    for name in ['John', 'David', 'Gillian', 'Chris']:
-        db.session.add(User(name=name))
+    db.session.add_all(list_users)
     db.session.commit()
 
     yield db

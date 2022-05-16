@@ -7,6 +7,7 @@ basedir = abspath(dirname(__name__))
 class Config(BaseSettings):
     SECRET_KEY: str = 'real-secret-key'
     SQLALCHEMY_TRACK_MODIFICATIONS: bool = False
+    SENDGRID_API_KEY: str = 'secret-api-key'
 
     @staticmethod
     def init_app(app):

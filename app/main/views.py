@@ -1,4 +1,6 @@
 from flask import render_template, session, redirect, url_for, flash
+
+from app.models.users import User
 from . import main
 from .forms import NameForm
 
@@ -18,3 +20,9 @@ def test():
         session['name'] = form.name.data
         return redirect(url_for('main.test'))
     return render_template('test.html', form=form, name=session.get('name'))
+
+
+@main.route('/verify')
+def test_verify():
+    user = User(username='testing')
+    return render_template('emails/verify.html', token=123, user=user)

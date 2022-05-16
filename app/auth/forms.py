@@ -1,6 +1,5 @@
 from flask_wtf import FlaskForm
-from pydantic import ValidationError
-from wtforms import StringField, SubmitField, PasswordField, BooleanField, EmailField
+from wtforms import StringField, SubmitField, PasswordField, BooleanField, EmailField, ValidationError
 from wtforms.validators import DataRequired, Length, Regexp, Email, EqualTo
 from ..models.users import User
 
@@ -18,15 +17,14 @@ class RegistrationForm(FlaskForm):
         DataRequired(),
         Length(3, 64),
         Regexp('^[A-Za-z][A-Za-z0-9_]*$', 0, 'Usernames can only contain letters, numbers or underscores.')])
-    password = PasswordField('Password', validators=[DataRequired()])
-    password2 = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo(password, 'Passwords must match')])
-    not_a_robot = BooleanField('I am not a robot')
+    password = PasswordField('Password', validators=[DataRequired(), EqualTo('password2', 'Passwords must match')])
+    password2 = PasswordField('Confirm Password', validators=[DataRequired()])
     submit = SubmitField('Register')
 
     def validate_email(self, field):
-        if User.query.filter_by(email=field.data).first():
+        if User.query.filter_by(email=field.data.lower()).first():
             raise ValidationError('Email alread registered.')
 
     def validate_username(self, field):
-        if User.query.filter_by(username=field.data).first():
+        if User.query.filter_by(username=field.data.lower()).first():
             raise ValidationError('Username is already taken.')

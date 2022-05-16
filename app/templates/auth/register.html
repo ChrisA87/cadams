@@ -3,6 +3,13 @@
 {% block title %} Cadams - Register {% endblock %}
 
 {% block page_content %}
+
+    {% for field, errors in form.errors.items() %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ form[field].label }}: {{ ', '.join(errors) }}
+    </div>
+    {% endfor %}
+
     <div class="page-header">
         <h1>Sign Up</h1>
     </div>
@@ -13,12 +20,11 @@
             {{ form.username.label(class="form-label") }} {{ form.username(class="form-control") }}
             {{ form.password.label(class="form-label") }} {{ form.password(class="form-control") }}
             {{ form.password2.label(class="form-label") }} {{ form.password2(class="form-control") }}
-            {{ form.not_a_robot.label(class="form-check-label") }} {{ form.not_a_robot(class="form-check") }}
-            {{ form.submit(class="btn btn-primary")}}
+            {{ form.submit(class="btn btn-primary") }}
         </form>
     </div>
     <p>
         Already registered?
         <a href="{{ url_for('auth.login') }}">Sign in</a>
     </p>
-    {% endblock %}
+{% endblock %}

@@ -4,7 +4,7 @@ from app.models.users import User
 from app.models.roles import Role
 
 
-@pytest.fixture
+@pytest.fixture(scope='session')
 def app():
     app = create_app('test')
     app.config["TESTING"] = True
@@ -12,11 +12,12 @@ def app():
     yield app
 
 
-@pytest.fixture
+@pytest.fixture(scope='session')
 def client(app):
     yield app.test_client(use_cookies=True)
 
-@pytest.fixture
+
+@pytest.fixture(scope='session')
 def list_users():
     yield [
         User(username='John', email='john@example.com', password='cat', id=1),
@@ -25,7 +26,7 @@ def list_users():
     ]
 
 
-@pytest.fixture
+@pytest.fixture(scope='session')
 def test_db(app, list_users):
     db.create_all()
 
@@ -35,6 +36,3 @@ def test_db(app, list_users):
     Role.insert_roles()
 
     yield db
-
-    db.session.remove()
-    db.drop_all()

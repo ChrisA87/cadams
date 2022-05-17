@@ -43,6 +43,13 @@ def test_post_register_returns_returns_200__username_taken(client, test_db):
     assert b'Username is already taken' in response.data
 
 
+def test_logout_when_not_logged_in(client, test_db):
+    response = client.get('/auth/logout', follow_redirects=True)
+    print(response.data.decode('utf-8'))
+    assert response.status_code == 200
+    assert b'Please log in to access this page' in response.data
+
+
 def test_post_login_returns_200__valid(client, test_db):
     response = client.post('/auth/login', data={'username': 'John', 'password': 'cat'}, follow_redirects=True)
     assert response.status_code == 200
@@ -54,12 +61,6 @@ def test_post_login_returns_200__invalid(client, test_db):
     print(response.data.decode('utf-8'))
     assert response.status_code == 200
     assert b'Invalid username or password' in response.data
-
-
-def test_logout_when_not_logged_in(client, test_db):
-    response = client.get('/auth/logout', follow_redirects=True)
-    assert response.status_code == 200
-    assert b'Please log in to access this page' in response.data
 
 
 def test_logout_when_logged_in(client, test_db):

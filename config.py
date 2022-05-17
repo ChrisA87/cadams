@@ -15,20 +15,20 @@ class Config(BaseSettings):
 
 
 class DevConfig(Config):
-    FLASK_ENV: str = 'development'
+    FLASK_ENV: str = 'dev'
     FLASK_DEBUG: bool = True
     TEMPLATES_AUTO_RELOAD: bool = True
     SQLALCHEMY_DATABASE_URI: str = f'sqlite:///{basedir}/data-dev.sqlite'
 
 
 class TestConfig(Config):
-    FLASK_ENV: str = 'testing'
+    FLASK_ENV: str = 'test'
     TESTING: bool = True
     SQLALCHEMY_DATABASE_URI: str = 'sqlite://'
 
 
 class ProdConfig(Config):
-    FLASK_ENV: str = 'production'
+    FLASK_ENV: str = 'prod'
     SQLALCHEMY_DATABASE_URI: str = f'sqlite:///{basedir}/data.sqlite'
 
 

@@ -7,4 +7,6 @@ flask-sqlalchemy
 flask-wtf
 gunicorn
 pydantic
+pymysql
 sendgrid
+

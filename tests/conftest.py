@@ -4,38 +4,35 @@ from app.models.users import User
 from app.models.roles import Role
 
 
-@pytest.fixture
+@pytest.fixture(scope='session')
 def app():
     app = create_app('test')
     app.config["TESTING"] = True
+    app.app_context().push()
     yield app
 
 
-@pytest.fixture
+@pytest.fixture(scope='session')
 def client(app):
-    yield app.test_client()
+    yield app.test_client(use_cookies=True)
 
-@pytest.fixture
+
+@pytest.fixture(scope='session')
 def list_users():
     yield [
-        User(name='John', password='cat'),
-        User(name='Susan', password='dog'),
-        User(name='Bob', password='rabbit')
+        User(username='John', email='john@example.com', password='cat', id=1),
+        User(username='Susan', email='susan@example.com', password='dog', id=2),
+        User(username='Bob', email='bob@example.com', password='rabbit', id=3)
     ]
 
 
-@pytest.fixture
+@pytest.fixture(scope='session')
 def test_db(app, list_users):
-    context = app.app_context()
-    context.push()
     db.create_all()
 
     # Import test data
     db.session.add_all(list_users)
     db.session.commit()
+    Role.insert_roles()
 
     yield db
-
-    db.session.remove()
-    db.drop_all()
-    context.pop()

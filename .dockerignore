@@ -1,7 +1,16 @@
-# custom
-*/migrations
-*/data
-*/htmlcov
-*/.vscode
-*/.pytest_cache
+# folders
+.git/
+data
+htmlcov
+envs
+tests
+
+# config
+.flake8
+.vscode
+.pytest_cache
 .coverage
+**/*.pyc
+
+# data
+**/*.sqlite

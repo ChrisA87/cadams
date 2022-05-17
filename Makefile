@@ -4,9 +4,9 @@ default: lint test
 
 pip:
 	pip install pip-tools
-	pip-compile
-	pip-compile dev-requirements.in
-	pip-sync dev-requirements.txt requirements.txt
+	pip-compile requirements/requirements.in
+	pip-compile requirements/dev-requirements.in
+	pip-sync requirements/dev-requirements.txt requirements/requirements.txt
 
 lint:
 	flake8 . --count --max-complexity=10 --max-line-length=127 --statistics

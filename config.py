@@ -25,6 +25,7 @@ class TestConfig(Config):
     FLASK_ENV: str = 'test'
     TESTING: bool = True
     SQLALCHEMY_DATABASE_URI: str = 'sqlite://'
+    WTF_CSRF_ENABLED = False
 
 
 class ProdConfig(Config):

@@ -1,3 +1,6 @@
+import pytest
+from app.models.users import User
+
 
 def test_get_login_returns_200(client):
     response = client.get('/auth/login')
@@ -69,3 +72,22 @@ def test_logout_when_logged_in(client, test_db):
     print(response.data.decode('utf-8'))
     assert response.status_code == 200
     assert b'You have been logged out' in response.data
+
+
+@pytest.mark.skip()
+def test_user_confirm_token__valid(client, test_db):
+    # register new user
+    new_user = User(username='steve', password='password1', email='steve@test.com')
+    client.post('/auth/register',
+                data={'username': new_user.username,
+                      'email': new_user.email,
+                      'password': 'password1',
+                      'password2': 'password1'},
+                follow_redirects=True)
+    
+    # Verify & Log In
+    token = new_user.generate_verify_token()
+    client.get(f'auth/verify/{token}', follow_redirects=True)
+    response = client.post(f'auth/login', data={'username': 'steve', 'password': 'password1'}, follow_redirects=True)
+    assert response.status_code == 200
+    assert b'Your account has been confirmed. Thanks!' in response.data

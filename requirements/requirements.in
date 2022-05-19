@@ -6,6 +6,8 @@ flask-migrate
 flask-sqlalchemy
 flask-wtf
 gunicorn
+numpy
+pandas
 pydantic
 pymysql
 sendgrid

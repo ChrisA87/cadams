@@ -1,4 +1,5 @@
 import pytest
+from flask_login import login_manager
 from app import create_app, db
 from app.models.users import User
 from app.models.roles import Role

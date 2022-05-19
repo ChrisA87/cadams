@@ -12,5 +12,6 @@ tests
 .coverage
 **/*.pyc
 
-# data
+# dev assets
 **/*.sqlite
+notebooks

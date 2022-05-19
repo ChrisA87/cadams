@@ -53,14 +53,26 @@ markupsafe==2.1.1
     #   jinja2
     #   mako
     #   wtforms
+numpy==1.22.3
+    # via
+    #   -r requirements/requirements.in
+    #   pandas
+pandas==1.4.2
+    # via -r requirements/requirements.in
 pydantic==1.9.0
     # via -r requirements/requirements.in
 pymysql==1.0.2
     # via -r requirements/requirements.in
+python-dateutil==2.8.2
+    # via pandas
 python-http-client==3.3.7
     # via sendgrid
+pytz==2022.1
+    # via pandas
 sendgrid==6.9.7
     # via -r requirements/requirements.in
+six==1.16.0
+    # via python-dateutil
 sqlalchemy==1.4.36
     # via
     #   alembic

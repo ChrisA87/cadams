@@ -1,4 +1,7 @@
 -c requirements.txt
 coverage
-pytest
 flake8
+jupyter
+matplotlib
+pytest
+seaborn

@@ -1,7 +1,7 @@
 from os.path import dirname, abspath
 from pydantic import BaseSettings
 
-basedir = abspath(dirname(__name__))
+basedir = abspath(dirname(__file__))
 
 
 class Config(BaseSettings):

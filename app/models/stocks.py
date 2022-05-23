@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 import pandas_datareader as pdr
-import pandas as pd
+
 
 from .. import db
 
@@ -61,9 +61,9 @@ class StockPrice(db.Model):
         if StockPrice.query.first() is None:
             for sym in symbols:
                 tmp = (df.xs(sym, axis=1, level=1)
-                        .dropna().reset_index()
-                        .assign(symbol=sym)
-                        .rename(columns=lambda x: x.replace(' ', '_').lower()))
+                         .dropna().reset_index()
+                         .assign(symbol=sym)
+                         .rename(columns=lambda x: x.replace(' ', '_').lower()))
 
                 stock_prices = [StockPrice(**d) for d in tmp.to_dict(orient='records')]
                 db.session.add_all(stock_prices)

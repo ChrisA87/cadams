@@ -27,7 +27,7 @@ class Stock(db.Model):
                 db.session.commit()
 
     def __repr__(self):
-        return f"<Stock [{self.id}]: {self.name} ({self.symbol})>"
+        return f"<Stock[{self.id}]: {self.name} ({self.symbol})>"
 
 
 class StockPrice(db.Model):
@@ -43,4 +43,4 @@ class StockPrice(db.Model):
     volume = db.Column(db.Integer)
 
     def __repr__(self):
-        return f'<StockPrice[{self.id}]: {self.symbol} - {self.date}>'
+        return f'<StockPrice[{self.id}]: {self.symbol} - {self.date.date()}>'

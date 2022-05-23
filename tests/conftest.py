@@ -1,8 +1,10 @@
 import pytest
-from flask_login import login_manager
+import random
+from datetime import datetime, timedelta
 from app import create_app, db
 from app.models.users import User
 from app.models.roles import Role
+from app.models.stocks import Stock, StockPrice, starting_stocks
 
 
 @pytest.fixture(scope='module')
@@ -28,12 +30,41 @@ def list_users():
 
 
 @pytest.fixture(scope='module')
-def test_db(app, list_users):
+def list_stocks():
+    yield [
+        Stock(symbol='CADM', name='Cadams, Inc.'),
+    ]
+
+
+@pytest.fixture(scope='module')
+def list_stock_prices():
+    n = 10
+    start_date = datetime(2022, 1, 1)
+    random.seed(1234)
+    yield [
+        StockPrice(
+            date=start_date + timedelta(days=i),
+            symbol='CADM',
+            open=random.random() * 10,
+            close=random.random() * 10,
+            adj_close=random.random() * 10,
+            high=random.random() * 10,
+            low=random.random() * 10
+        )
+        for i in range(10)
+    ]
+
+
+@pytest.fixture(scope='module')
+def test_db(app, list_users, list_stocks, list_stock_prices):
     db.create_all()
 
     # Import test data
     db.session.add_all(list_users)
+    db.session.add_all(list_stocks)
+    db.session.add_all(list_stock_prices)
     db.session.commit()
     Role.insert_roles()
+    Stock.insert_stocks(starting_stocks)
 
     yield db

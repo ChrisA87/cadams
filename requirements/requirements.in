@@ -8,7 +8,7 @@ flask-wtf
 gunicorn
 numpy
 pandas
+pandas-datareader
 pydantic
 pymysql
 sendgrid
-

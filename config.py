@@ -30,7 +30,7 @@ class TestConfig(Config):
 
 class ProdConfig(Config):
     FLASK_ENV: str = 'prod'
-    SQLALCHEMY_DATABASE_URI: str = f'sqlite:///{basedir}/data.sqlite'
+    SQLALCHEMY_DATABASE_URI: str = 'mysql+pymysql://root:root@172.17.0.2/cadams'
     SERVER_NAME: str = 'cadams.app'
     PREFERRED_URL_SCHEME: str = 'https'
 

@@ -6,4 +6,3 @@ per-file-ignores =
 
 exclude =
     migrations/
-    tests/

@@ -8,6 +8,8 @@ alembic==1.7.7
     # via flask-migrate
 blinker==1.4
     # via flask-mail
+bokeh==2.4.3
+    # via -r requirements/requirements.in
 certifi==2022.5.18.1
     # via requests
 charset-normalizer==2.0.12
@@ -51,7 +53,9 @@ itsdangerous==2.1.2
     #   flask
     #   flask-wtf
 jinja2==3.1.2
-    # via flask
+    # via
+    #   bokeh
+    #   flask
 lxml==4.8.0
     # via pandas-datareader
 mako==1.2.0
@@ -64,23 +68,32 @@ markupsafe==2.1.1
 numpy==1.22.3
     # via
     #   -r requirements/requirements.in
+    #   bokeh
     #   pandas
+packaging==21.3
+    # via bokeh
 pandas==1.4.2
     # via
     #   -r requirements/requirements.in
     #   pandas-datareader
 pandas-datareader==0.10.0
     # via -r requirements/requirements.in
+pillow==9.1.1
+    # via bokeh
 pydantic==1.9.0
     # via -r requirements/requirements.in
 pymysql==1.0.2
     # via -r requirements/requirements.in
+pyparsing==3.0.9
+    # via packaging
 python-dateutil==2.8.2
     # via pandas
 python-http-client==3.3.7
     # via sendgrid
 pytz==2022.1
     # via pandas
+pyyaml==6.0
+    # via bokeh
 requests==2.27.1
     # via pandas-datareader
 sendgrid==6.9.7
@@ -93,8 +106,12 @@ sqlalchemy==1.4.36
     #   flask-sqlalchemy
 starkbank-ecdsa==2.0.3
     # via sendgrid
+tornado==6.1
+    # via bokeh
 typing-extensions==4.2.0
-    # via pydantic
+    # via
+    #   bokeh
+    #   pydantic
 urllib3==1.26.9
     # via requests
 werkzeug==2.1.2

@@ -1,5 +1,4 @@
 import pytest
-from app.models.users import User
 
 
 def test_cant_read_user_password(list_users):

@@ -1,5 +1,3 @@
-import pytest
-
 
 def test_get_index_returns_200(client):
     response = client.get('/')

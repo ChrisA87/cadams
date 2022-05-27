@@ -38,7 +38,6 @@ def list_stocks():
 
 @pytest.fixture(scope='module')
 def list_stock_prices():
-    n = 10
     start_date = datetime(2022, 1, 1)
     random.seed(1234)
     yield [

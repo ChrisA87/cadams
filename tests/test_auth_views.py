@@ -1,4 +1,3 @@
-import pytest
 from app.models.users import User
 
 
@@ -34,7 +33,7 @@ def test_post_register_returns_returns_200__username_taken(client, test_db):
                       'email': 'joe@example.com',
                       'password': 'foo',
                       'password2': 'foo'},
-                      follow_redirects=True)
+                follow_redirects=True)
     response = client.post('/auth/register',
                            data={'username': 'joe',
                                  'email': 'joe@example.com',
@@ -83,7 +82,7 @@ def test_user_confirm_token__valid(client, test_db):
                       'password': 'password1',
                       'password2': 'password1'},
                 follow_redirects=True)
-    
+
     # Login
     client.post('/auth/login', data={'username': new_user.username, 'password': 'password1'},
                 follow_redirects=False)
@@ -103,7 +102,7 @@ def test_user_confirm_token__invalid(client, test_db):
                       'password': 'bar',
                       'password2': 'bar'},
                 follow_redirects=True)
-    
+
     # Login
     client.post('/auth/login', data={'username': new_user.username, 'password': 'bar'},
                 follow_redirects=False)

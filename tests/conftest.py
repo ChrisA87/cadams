@@ -50,7 +50,7 @@ def list_stock_prices():
             high=random.random() * 10,
             low=random.random() * 10
         )
-        for i in range(10)
+        for i in range(500)
     ]
 
 
@@ -67,3 +67,5 @@ def test_db(app, list_users, list_stocks, list_stock_prices):
     Stock.insert_stocks(starting_stocks)
 
     yield db
+
+    db.session.remove()

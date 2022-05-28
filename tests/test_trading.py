@@ -66,3 +66,13 @@ def test_plotting_methods_on_fitted_mean_reversion(mock_stock_price_df, method):
     mr = MeanReversion(mock_stock_price_df)
     mr.fit()
     assert getattr(mr, method)() is None
+
+
+def test_no_date_raises_KeyError(mock_stock_price_df):
+    df = mock_stock_price_df.drop('date', axis=1)
+    with pytest.raises(KeyError):
+        SMA(df)
+
+
+def test_get_plot_title_with_no_stock_is_none(mock_stock_price_df):
+    assert SMA(mock_stock_price_df)._get_plot_title(None) is None

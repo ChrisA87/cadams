@@ -1,5 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from bokeh.plotting import figure, ColumnDataSource
+from bokeh.models import DatetimeTickFormatter, NumeralTickFormatter
+from bokeh.embed import components
 from .errors import NotFittedError
 
 
@@ -46,6 +49,29 @@ class Strategy:
         self._is_fit()
         plt_kws = {} if plt_kws is None else plt_kws
         self.df.dropna()['position'].plot(**plt_kws)
+
+    def get_bokeh_components(self):
+        self._is_fit()
+        p = figure(
+            x_axis_label="Date",
+            y_axis_label="Price",
+            width=800,
+            height=500
+        )
+
+        source = ColumnDataSource(self.df.dropna())
+
+        p.line(x='date', y='adj_close', source=source, legend_label="Price")
+        p.line(x='date', y='sma_fast', source=source, color='green', legend_label=f'{self.fast} day sma')
+        p.line(x='date', y='sma_slow', source=source, color='red', legend_label=f'{self.slow} day sma')
+
+        p.legend.location = 'top_left'
+
+        # Format x-axis
+        p.yaxis[0].formatter = NumeralTickFormatter(format="$0.00")
+        p.xaxis[0].formatter = DatetimeTickFormatter(months="%Y")
+
+        return components(p)
 
     def __repr__(self):
         return f'<{self.__class__.__name__}{" fitted" if self._fit else ""}>'

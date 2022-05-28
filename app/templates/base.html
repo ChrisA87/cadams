@@ -28,8 +28,8 @@
               Projects
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><p class="dropdown-header">Projects</p></li>
-              <li><a class="dropdown-item" href="#">Coming soon</a></li>
+              <li><p class="dropdown-header">Algorithmic Trading</p></li>
+              <li><a class="dropdown-item" href="{{ url_for('main.stocks') }}">Stocks</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><p class="dropdown-header">Other</p></li>
               <li><a class="dropdown-item" href="#">Coming soon</a></li>
@@ -63,7 +63,8 @@
   </div>
   {% endfor %}
 
-  {% block page_content %}{% endblock %}
+  {% block page_content %}
+  {% endblock %}
 </div>
 {% endblock %}
 

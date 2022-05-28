@@ -18,6 +18,7 @@ def stocks():
 
 @main.route('/stocks/<symbol>')
 def stock_plot(symbol):
+    stock = Stock.query.filter_by(symbol=symbol).first_or_404()
     base_query = (StockPrice.query
                   .with_entities(StockPrice.date,
                                  StockPrice.adj_close)
@@ -25,5 +26,5 @@ def stock_plot(symbol):
     df = pd.read_sql(base_query.statement, base_query.session.bind)
     sma = SMA(df)
     sma.fit()
-    script, div = sma.get_bokeh_components()
+    script, div = sma.get_bokeh_components(stock)
     return render_template('stock_plot.html', script=script, div=div, symbol=symbol)

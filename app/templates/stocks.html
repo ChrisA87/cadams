@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Cadams - Index{% endblock %}
+
+{% block content %}
+{{ super() }}
+<div class="container">
+    <div>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Stocks</li>
+            </ol>
+          </nav>
+    </div>
+    <div>
+        <h1>
+            Available Stocks
+        </h1>
+    </div>
+    <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Symbol</th>
+            <th scope="col">Name</th>
+            <th scope="col">Charts</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for stock in stocks %}
+            <tr>
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{ stock.symbol }}</td>
+                <td>{{ stock.name }}</td>
+                <td>
+                  <a class="btn btn-primary btn-sm" href="{{ url_for('main.stock_plot', symbol=stock.symbol) }}" role="button">Go</a>
+                </td>
+            </tr>
+           {% endfor %}
+        </tbody>
+      </table>    
+</div>
+{% endblock %}

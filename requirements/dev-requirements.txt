@@ -29,7 +29,9 @@ cffi==1.15.0
 coverage==6.3.3
     # via -r requirements/dev-requirements.in
 cycler==0.11.0
-    # via matplotlib
+    # via
+    #   -c requirements/requirements.txt
+    #   matplotlib
 debugpy==1.6.0
     # via ipykernel
 decorator==5.1.1
@@ -47,7 +49,9 @@ fastjsonschema==2.15.3
 flake8==4.0.1
     # via -r requirements/dev-requirements.in
 fonttools==4.33.3
-    # via matplotlib
+    # via
+    #   -c requirements/requirements.txt
+    #   matplotlib
 iniconfig==1.1.1
     # via pytest
 ipykernel==6.13.0
@@ -101,7 +105,9 @@ jupyterlab-pygments==0.2.2
 jupyterlab-widgets==1.1.0
     # via ipywidgets
 kiwisolver==1.4.2
-    # via matplotlib
+    # via
+    #   -c requirements/requirements.txt
+    #   matplotlib
 markupsafe==2.1.1
     # via
     #   -c requirements/requirements.txt
@@ -109,7 +115,7 @@ markupsafe==2.1.1
     #   nbconvert
 matplotlib==3.5.2
     # via
-    #   -r requirements/dev-requirements.in
+    #   -c requirements/requirements.txt
     #   seaborn
 matplotlib-inline==0.1.3
     # via

@@ -55,8 +55,8 @@ class Strategy:
         p = figure(
             x_axis_label="Date",
             y_axis_label="Price",
-            width=800,
-            height=500
+            sizing_mode='stretch_width',
+            height=350
         )
 
         source = ColumnDataSource(self.df.dropna())

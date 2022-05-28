@@ -62,8 +62,8 @@ class Strategy:
         source = ColumnDataSource(self.df.dropna())
 
         p.line(x='date', y='adj_close', source=source, legend_label="Price")
-        p.line(x='date', y='sma_fast', source=source, color='green', legend_label=f'{self.fast} day sma')
-        p.line(x='date', y='sma_slow', source=source, color='red', legend_label=f'{self.slow} day sma')
+        p.line(x='date', y='sma_fast', source=source, color='green', legend_label=f'MA-{self.fast}')
+        p.line(x='date', y='sma_slow', source=source, color='red', legend_label=f'MA-{self.slow}')
 
         p.legend.location = 'top_left'
 

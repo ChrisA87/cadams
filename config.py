@@ -5,7 +5,7 @@ basedir = abspath(dirname(__file__))
 
 
 class Config(BaseSettings):
-    SECRET_KEY: str = 'real-secret-key'
+    SECRET_KEY: str = 'secret-key'
     SQLALCHEMY_TRACK_MODIFICATIONS: bool = False
     SENDGRID_API_KEY: str = 'secret-api-key'
 
@@ -15,8 +15,9 @@ class Config(BaseSettings):
 
 
 class DevConfig(Config):
-    FLASK_ENV: str = 'dev'
+    FLASK_ENV: str = 'development'
     FLASK_DEBUG: bool = True
+    DEBUG_TB_ENABLED: bool = True
     TEMPLATES_AUTO_RELOAD: bool = True
     SQLALCHEMY_DATABASE_URI: str = f'sqlite:///{basedir}/data-dev.sqlite'
 

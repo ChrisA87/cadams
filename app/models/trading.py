@@ -56,7 +56,6 @@ class Strategy:
     def _get_plot_title(self, stock):
         if stock:
             metric = self.metric.replace('_', ' ').title()
-            print(self.df)
             return (f'{stock.name} ({stock.symbol}) {metric} Price | {self.fast} and {self.slow} Day Moving Averages | '
                     f'{self.df.index.min().strftime("%b-%Y")} - {self.df.index.max().strftime("%b-%Y")}')
 

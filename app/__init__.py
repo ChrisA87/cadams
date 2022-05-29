@@ -1,11 +1,13 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from flask_debugtoolbar import DebugToolbarExtension
 from config import config
 
 db = SQLAlchemy()
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
+toolbar = DebugToolbarExtension()
 
 
 def create_app(config_name='default'):
@@ -19,6 +21,7 @@ def create_app(config_name='default'):
     # Initialize extensions
     db.init_app(app)
     login_manager.init_app(app)
+    toolbar.init_app(app)
 
     # Register Blueprints
     from .main import main

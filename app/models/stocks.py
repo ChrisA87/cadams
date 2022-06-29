@@ -6,7 +6,7 @@ from .. import db
 
 
 starting_stocks = [
-    ('FB', 'Facebook, Inc.'),
+    ('META', 'Meta Platforms, Inc.'),
     ('AAPL', 'Apple, Inc.'),
     ('SONY', 'Sony Group Corporation'),
     ('MSFT', 'Microsoft Corporation'),

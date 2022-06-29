@@ -159,3 +159,32 @@ class MeanReversion(Strategy):
         plt.axhline(self.threshold, color='r')
         plt.axhline(-self.threshold, color='r')
         plt.axhline(0, color='k', linestyle='--')
+
+
+class OLS(Strategy):
+    """
+    TODO
+    """
+
+    def fit(self, lags=5, metric='adj_close'):
+        super().fit(**dict(lags=lags, metric=metric))
+
+    def _set_lags(self):
+        self.lag_cols = []
+        for i in range(1, self.lags + 1):
+            col = f'lag_{i}'
+            self.lag_cols.append(col)
+            self.df[col] = self.df['returns'].shift(i)
+        self._dropna()
+
+    def _set_position(self):
+        self._set_lags()
+        reg = np.linalg.lstsq(
+            a=self.df[self.lag_cols],
+            b=np.sign(self.df['returns']),
+            rcond=None)[0]
+        self.df['prediction'] = np.dot(self.df[self.lag_cols], reg)
+        self.df['position'] = np.sign(self.df['prediction']).clip(lower=self.short_pos)
+
+    def _set_strategy(self):
+        self.df['strategy'] = self.df['returns'] * self.df['position']

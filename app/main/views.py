@@ -1,7 +1,7 @@
 import pandas as pd
 from flask import render_template
 from . import main
-from ..models.stocks import Stock, StockPrice
+from ..models.stocks import Stock, StockPrice, starting_stocks
 from ..models.trading import SMA
 
 
@@ -10,9 +10,10 @@ def index():
     return render_template('index.html')
 
 
-@main.route('/stocks')
+@main.route('/sample-stocks')
 def stocks():
-    stocks = Stock.query.all()
+    symbols = [x for x, _ in starting_stocks]
+    stocks = Stock.query.filter(Stock.symbol.in_(symbols)).all()
     return render_template('stocks.html', stocks=stocks)
 
 

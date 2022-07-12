@@ -6,13 +6,12 @@ from .. import db
 
 
 starting_stocks = [
-    ('META', 'Meta Platforms, Inc.'),
     ('AAPL', 'Apple, Inc.'),
-    ('SONY', 'Sony Group Corporation'),
     ('MSFT', 'Microsoft Corporation'),
-    ('TTWO', 'Take-Two Interactive Software, Inc.'),
-    ('NFLX', 'Netflix, Inc.'),
-    ('SNOW', 'Snowflake, Inc.')
+    ('AMZN', 'Amazon.com, Inc.'),
+    ('EURUSD=X', 'Euro / US Dollar Rate'),
+    ('GDX', 'VanEck Gold Miners ETF'),
+    ('GLD', 'SPDR Gold Trust'),
 ]
 
 

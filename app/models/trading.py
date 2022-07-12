@@ -1,3 +1,13 @@
+"""
+
+Module for backtesting various trading strategies
+
+Author: Chris Adams
+Date: 27 May 2022
+
+"""
+
+
 import numpy as np
 import matplotlib.pyplot as plt
 from bokeh.plotting import figure, ColumnDataSource

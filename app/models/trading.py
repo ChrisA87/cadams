@@ -87,6 +87,13 @@ class Strategy:
     def __repr__(self):
         return f'<{self.__class__.__name__}{" fitted" if self._fit else ""}>'
 
+    def get_returns(self):
+        """
+        TODO
+        """
+        self._check_fitted()
+        return self.df[['returns', 'strategy']].sum().apply(np.exp)
+
 
 class SMA(Strategy):
     """

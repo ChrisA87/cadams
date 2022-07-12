@@ -4,6 +4,10 @@
 #
 #    pip-compile requirements/dev-requirements.in
 #
+appnope==0.1.3
+    # via
+    #   ipykernel
+    #   ipython
 argon2-cffi==21.3.0
     # via notebook
 argon2-cffi-bindings==21.2.0
@@ -23,10 +27,10 @@ bleach==5.0.0
 cffi==1.15.0
     # via argon2-cffi-bindings
 coverage==6.3.3
-    # via -r dev-requirements.in
+    # via -r requirements/dev-requirements.in
 cycler==0.11.0
     # via
-    #   -c requirements.txt
+    #   -c requirements/requirements.txt
     #   matplotlib
 debugpy==1.6.0
     # via ipykernel
@@ -43,10 +47,10 @@ executing==0.8.3
 fastjsonschema==2.15.3
     # via nbformat
 flake8==4.0.1
-    # via -r dev-requirements.in
+    # via -r requirements/dev-requirements.in
 fonttools==4.33.3
     # via
-    #   -c requirements.txt
+    #   -c requirements/requirements.txt
     #   matplotlib
 iniconfig==1.1.1
     # via pytest
@@ -73,13 +77,13 @@ jedi==0.18.1
     # via ipython
 jinja2==3.1.2
     # via
-    #   -c requirements.txt
+    #   -c requirements/requirements.txt
     #   nbconvert
     #   notebook
 jsonschema==4.5.1
     # via nbformat
 jupyter==1.0.0
-    # via -r dev-requirements.in
+    # via -r requirements/dev-requirements.in
 jupyter-client==7.3.1
     # via
     #   ipykernel
@@ -102,16 +106,16 @@ jupyterlab-widgets==1.1.0
     # via ipywidgets
 kiwisolver==1.4.2
     # via
-    #   -c requirements.txt
+    #   -c requirements/requirements.txt
     #   matplotlib
 markupsafe==2.1.1
     # via
-    #   -c requirements.txt
+    #   -c requirements/requirements.txt
     #   jinja2
     #   nbconvert
 matplotlib==3.5.2
     # via
-    #   -c requirements.txt
+    #   -c requirements/requirements.txt
     #   seaborn
 matplotlib-inline==0.1.3
     # via
@@ -145,14 +149,14 @@ notebook==6.4.12
     #   widgetsnbextension
 numpy==1.22.3
     # via
-    #   -c requirements.txt
+    #   -c requirements/requirements.txt
     #   matplotlib
     #   pandas
     #   scipy
     #   seaborn
 packaging==21.3
     # via
-    #   -c requirements.txt
+    #   -c requirements/requirements.txt
     #   ipykernel
     #   matplotlib
     #   nbconvert
@@ -160,7 +164,7 @@ packaging==21.3
     #   qtpy
 pandas==1.4.2
     # via
-    #   -c requirements.txt
+    #   -c requirements/requirements.txt
     #   seaborn
 pandocfilters==1.5.0
     # via nbconvert
@@ -172,7 +176,7 @@ pickleshare==0.7.5
     # via ipython
 pillow==9.1.1
     # via
-    #   -c requirements.txt
+    #   -c requirements/requirements.txt
     #   matplotlib
 pluggy==1.0.0
     # via pytest
@@ -206,22 +210,22 @@ pygments==2.12.0
     #   qtconsole
 pyparsing==3.0.9
     # via
-    #   -c requirements.txt
+    #   -c requirements/requirements.txt
     #   matplotlib
     #   packaging
 pyrsistent==0.18.1
     # via jsonschema
 pytest==7.1.2
-    # via -r dev-requirements.in
+    # via -r requirements/dev-requirements.in
 python-dateutil==2.8.2
     # via
-    #   -c requirements.txt
+    #   -c requirements/requirements.txt
     #   jupyter-client
     #   matplotlib
     #   pandas
 pytz==2022.1
     # via
-    #   -c requirements.txt
+    #   -c requirements/requirements.txt
     #   pandas
 pyzmq==23.0.0
     # via
@@ -235,12 +239,12 @@ qtpy==2.1.0
 scipy==1.8.1
     # via seaborn
 seaborn==0.11.2
-    # via -r dev-requirements.in
+    # via -r requirements/dev-requirements.in
 send2trash==1.8.0
     # via notebook
 six==1.16.0
     # via
-    #   -c requirements.txt
+    #   -c requirements/requirements.txt
     #   asttokens
     #   bleach
     #   python-dateutil
@@ -256,7 +260,7 @@ tomli==2.0.1
     # via pytest
 tornado==6.1
     # via
-    #   -c requirements.txt
+    #   -c requirements/requirements.txt
     #   ipykernel
     #   jupyter-client
     #   notebook

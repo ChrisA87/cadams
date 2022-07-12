@@ -11,7 +11,7 @@ blinker==1.4
     #   flask-debugtoolbar
     #   flask-mail
 bokeh==2.4.3
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 certifi==2022.5.18.1
     # via requests
 charset-normalizer==2.0.12
@@ -23,10 +23,10 @@ cycler==0.11.0
 dnspython==2.2.1
     # via email-validator
 email-validator==1.2.1
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 flask==2.1.2
     # via
-    #   -r requirements/requirements.in
+    #   -r requirements.in
     #   flask-debugtoolbar
     #   flask-login
     #   flask-mail
@@ -34,25 +34,25 @@ flask==2.1.2
     #   flask-sqlalchemy
     #   flask-wtf
 flask-debugtoolbar==0.13.1
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 flask-login==0.6.1
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 flask-mail==0.9.1
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 flask-migrate==3.1.0
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 flask-sqlalchemy==2.5.1
     # via
-    #   -r requirements/requirements.in
+    #   -r requirements.in
     #   flask-migrate
 flask-wtf==1.0.1
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 fonttools==4.33.3
     # via matplotlib
 greenlet==1.1.2
     # via sqlalchemy
 gunicorn==20.1.0
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 idna==3.3
     # via
     #   email-validator
@@ -68,7 +68,7 @@ jinja2==3.1.2
     #   flask
 kiwisolver==1.4.2
     # via matplotlib
-lxml==4.8.0
+lxml==4.9.1
     # via pandas-datareader
 mako==1.2.0
     # via alembic
@@ -78,10 +78,10 @@ markupsafe==2.1.1
     #   mako
     #   wtforms
 matplotlib==3.5.2
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 numpy==1.22.3
     # via
-    #   -r requirements/requirements.in
+    #   -r requirements.in
     #   bokeh
     #   matplotlib
     #   pandas
@@ -91,18 +91,18 @@ packaging==21.3
     #   matplotlib
 pandas==1.4.2
     # via
-    #   -r requirements/requirements.in
+    #   -r requirements.in
     #   pandas-datareader
 pandas-datareader==0.10.0
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 pillow==9.1.1
     # via
     #   bokeh
     #   matplotlib
 pydantic==1.9.0
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 pymysql==1.0.2
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 pyparsing==3.0.9
     # via
     #   matplotlib
@@ -120,7 +120,7 @@ pyyaml==6.0
 requests==2.27.1
     # via pandas-datareader
 sendgrid==6.9.7
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 six==1.16.0
     # via python-dateutil
 sqlalchemy==1.4.36

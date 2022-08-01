@@ -1,10 +1,8 @@
 """
-
 Module for backtesting various trading strategies
 
 Author: Chris Adams
 Date: 27 May 2022
-
 """
 
 
@@ -13,13 +11,17 @@ import matplotlib.pyplot as plt
 from bokeh.plotting import figure, ColumnDataSource
 from bokeh.models import DatetimeTickFormatter, NumeralTickFormatter
 from bokeh.embed import components
-from .errors import NotFittedError
+from ..models.errors import NotFittedError
 
 
 class Strategy:
     """
     Base strategy class with common setup and methods.
-    Not intended to be used directly. Instead, use SMA, Momentum or MeanReversion instances.
+    Not intended to be used directly. Instead, use one of
+        - SMA
+        - Momentum
+        - MeanReversion
+        - OLS
     """
 
     def __init__(self, df, short_pos=0):

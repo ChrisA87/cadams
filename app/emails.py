@@ -14,4 +14,8 @@ def send_email(to_email, subject, template, **kwargs):
         sg = SendGridAPIClient(current_app.config.get('SENDGRID_API_KEY'))
         sg.send(message)
     except Exception:
+        """
+        TODO
+        fix me - proper exception handling
+        """
         pass

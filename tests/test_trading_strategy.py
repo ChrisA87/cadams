@@ -1,7 +1,7 @@
 import pytest
 import pandas as pd
 import numpy as np
-from app.models.trading import SMA, Momentum, MeanReversion, OLS
+from app.trading import SMA, Momentum, MeanReversion, OLS
 from app.models.errors import NotFittedError
 
 

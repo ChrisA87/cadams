@@ -2,7 +2,7 @@ import pandas as pd
 from flask import render_template
 from . import main
 from ..models.stocks import Stock, StockPrice, starting_stocks
-from ..models.trading import SMA
+from ..trading import SMA
 
 
 @main.route('/')

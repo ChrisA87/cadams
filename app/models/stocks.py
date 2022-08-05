@@ -55,9 +55,8 @@ class StockPrice(db.Model):
         start = date_ref - timedelta(days=365*10)
         symbols = [x for x, _ in starting_stocks]
 
-        df = pdr.yahoo.daily.YahooDailyReader(symbols=symbols, start=start).read()
-
         if StockPrice.query.first() is None:
+            df = pdr.yahoo.daily.YahooDailyReader(symbols=symbols, start=start).read()
             for sym in symbols:
                 tmp = (df.xs(sym, axis=1, level=1)
                          .dropna().reset_index()

@@ -52,16 +52,14 @@ class StockPrice(db.Model):
     @staticmethod
     def get_latest_date(symbol=None):
         if symbol is not None:
-            latest_date = (
-                StockPrice.query
-                .filter(func.upper(symbol) == symbol.upper())
-                .with_entities(func.max(StockPrice.date))
-                .scalar())
+            latest_date = (StockPrice.query
+                           .filter(func.upper(symbol) == symbol.upper())
+                           .with_entities(func.max(StockPrice.date))
+                           .scalar())
         else:
-            latest_date = (
-                StockPrice.query
-                .with_entities(func.max(StockPrice.date))
-                .scalar())
+            latest_date = (StockPrice.query
+                           .with_entities(func.max(StockPrice.date))
+                           .scalar())
 
         if latest_date is None:
             latest_date = datetime.now() - timedelta(days=365*10)

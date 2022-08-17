@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 import pandas_datareader as pdr
-
-
+from pandas import MultiIndex
+from sqlalchemy import func
 from .. import db
 
 
@@ -50,21 +50,61 @@ class StockPrice(db.Model):
         return f'<StockPrice[{self.id}]: {self.symbol} - {self.date.date()}>'
 
     @staticmethod
-    def _insert_stock_prices():
-        date_ref = datetime(2022, 5, 22)
-        start = date_ref - timedelta(days=365*10)
-        symbols = [x for x, _ in starting_stocks]
-
-        if StockPrice.query.first() is None:
-            df = pdr.yahoo.daily.YahooDailyReader(symbols=symbols, start=start).read()
-            for sym in symbols:
-                tmp = (df.xs(sym, axis=1, level=1)
-                         .dropna().reset_index()
-                         .assign(symbol=sym)
-                         .rename(columns=lambda x: x.replace(' ', '_').lower()))
-
-                stock_prices = [StockPrice(**d) for d in tmp.to_dict(orient='records')]
-                db.session.add_all(stock_prices)
-                db.session.commit()
+    def get_latest_date(symbol=None):
+        if symbol is not None:
+            latest_date = (
+                StockPrice.query
+                .filter(func.upper(symbol) == symbol.upper())
+                .with_entities(func.max(StockPrice.date))
+                .scalar())
         else:
-            print('stock_prices table is not empty')
+            latest_date = (
+                StockPrice.query
+                .with_entities(func.max(StockPrice.date))
+                .scalar())
+
+        if latest_date is None:
+            latest_date = datetime.now() - timedelta(days=365*10)
+
+        return latest_date
+
+    @staticmethod
+    def get_price_data(symbols, start_date):
+        data = pdr.yahoo.daily.YahooDailyReader(symbols=symbols, start=start_date).read()
+        return data
+
+    @staticmethod
+    def process_price_data(data, symbol=None):
+        stock_prices = []
+        if isinstance(data.columns, MultiIndex):
+            if symbol is not None:
+                raise ValueError("symbol value is not permitted when the price dataframe is MultiIndex.")
+            symbols = data.columns.levels[1]
+            for symbol in symbols:
+                df = (data.xs(symbol, axis=1, level=1)
+                          .dropna()
+                          .reset_index()
+                          .assign(symbol=symbol.upper())
+                          .rename(columns=lambda x: x.replace(' ', '_').lower()))
+                stock_prices.extend([StockPrice(**d) for d in df.to_dict(orient='records')])
+        else:
+            if symbol is None:
+                raise ValueError("symbol must be supplied if the DataFrame contains price data for only a single stock.")
+            df = (data.dropna()
+                  .reset_index()
+                  .assign(symbol=symbol.upper())
+                  .rename(columns=lambda x: x.replace(' ', '_').lower()))
+            stock_prices.extend([StockPrice(**d) for d in df.to_dict(orient='records')])
+        return stock_prices
+
+    @staticmethod
+    def insert_stock_prices(stock_prices):
+        db.session.add_all(stock_prices)
+        db.session.commit()
+
+    @staticmethod
+    def update(symbol=None):
+        start_date = StockPrice.get_latest_date(symbol) + timedelta(days=1)
+        new_data = StockPrice.get_price_data(symbol, start_date)
+        stock_prices = StockPrice.process_price_data(new_data, symbol=symbol)
+        StockPrice.insert_stock_prices(stock_prices)

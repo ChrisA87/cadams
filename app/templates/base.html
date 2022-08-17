@@ -29,7 +29,10 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><p class="dropdown-header">Algorithmic Trading</p></li>
-              <li><a class="dropdown-item" href="{{ url_for('main.stocks') }}">Stocks</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('main.sample_stocks') }}">Sample Stocks</a></li>
+              {% if current_user.is_authenticated %}
+              <li><a class="dropdown-item" href="{{ url_for('main.stocks') }}">My Stocks</a></li>
+              {% endif %}
               <li><hr class="dropdown-divider"></li>
               <li><p class="dropdown-header">Other</p></li>
               <li><a class="dropdown-item" href="#">Coming soon</a></li>

@@ -51,7 +51,7 @@ class StockPrice(db.Model):
 
     @staticmethod
     def get_latest_date(symbol=None):
-        if symbol is not None:
+        if symbol is None:
             latest_dates = (StockPrice.query
                             .with_entities(StockPrice.symbol, func.max(StockPrice.date))
                             .group_by(StockPrice.symbol)
@@ -59,6 +59,7 @@ class StockPrice(db.Model):
             return min([x for _, x in latest_dates])
         else:
             latest_date = (StockPrice.query
+                           .filter_by(symbol=symbol)
                            .with_entities(func.max(StockPrice.date))
                            .scalar())
 

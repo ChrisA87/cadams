@@ -15,8 +15,16 @@
     </div>
     <div>
         <h1>
-            Available Stocks
+            Stocks
         </h1>
+        {% if sample %}
+        <p class="lead">
+          These are some sample stocks that you can use to experiment with backtesting of various trading strategies.
+        </p>
+        <p>
+          Create an account to select your own stocks to test.
+        </p>
+        {% endif %}
     </div>
     <table class="table table-striped table-hover">
         <thead>

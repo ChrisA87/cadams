@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}Cadams - Index{% endblock %}
+{% block title %}Cadams - {% if sample %}
+  Sample Stocks
+{% else %}
+  Stocks
+{% endif %}{% endblock %}
 
 {% block content %}
 {{ super() }}
@@ -42,7 +46,7 @@
                 <td>{{ stock.symbol }}</td>
                 <td>{{ stock.name }}</td>
                 <td>
-                  <a class="btn btn-primary btn-sm" href="{{ url_for('main.stock_plot', symbol=stock.symbol) }}" role="button">Go</a>
+                  <a class="btn btn-primary btn-sm" href="{{ url_for('main.stock_page', symbol=stock.symbol) }}" role="button">Go</a>
                 </td>
             </tr>
            {% endfor %}

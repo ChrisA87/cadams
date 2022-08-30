@@ -14,7 +14,7 @@ def test_get_stocks_returns_200(client, test_db):
 def test_valid_get_stocks_plot_returns_200(client, test_db):
     response = client.get('/stocks/CADM')
     assert response.status_code == 200
-    assert b"Trading Strategy For CADM" in response.data
+    assert b"Cadams, Inc. (CADM) Trading Stategies" in response.data
 
 
 def test_invalid_get_stocks_plot_returns_404(client, test_db):

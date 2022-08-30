@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}{{ title }}{% endblock title %}
+{% block title %}Cadams - {{ stock.symbol }} - {{ strategy }}{% endblock title %}
 
 {% block styles %}
 {{ super() }}
@@ -18,40 +18,25 @@
 {% block content %}
 {{ super() }}
 <div class="container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{{ url_for('main.stocks') }}">Stocks</a></li>
+      <li class="breadcrumb-item"><a href="{{ url_for('main.stock_page', symbol=stock.symbol) }}">{{stock.symbol}}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{ strategy }}</li>
+    </ol>
+  </nav>
 
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Home</a></li>
-          <li class="breadcrumb-item"><a href="{{ url_for('main.stocks') }}">Stocks</a></li>
-          <li class="breadcrumb-item active" aria-current="page">{{ symbol }}</li>
-        </ol>
-    </nav>
+  <h1>{{strategy.title()}} Strategy For {{ stock.symbol.upper() }}</h1>
 
-    <h1>Trading Strategy For {{ symbol.upper() }}</h1>
-
-    <div class="accordion">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              Simple Moving Averages
-            </button>
-          </h2>
-          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <!-- <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow. -->
-                <div class="container my-5">
-                    {{ div|safe }}
-                    {{ script|safe }}
-                </div>
-            </div>
-          </div>
-        </div>
-    </div>
-
-
+  <div class="container my-5">
+    {{ div|safe }}
+    {{ script|safe }}
+  </div>
 
 </div>
 {% endblock content %}
+
 {% block scripts %}
 {{ super() }}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bokeh/2.4.3/bokeh.min.js"></script>

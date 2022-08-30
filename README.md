@@ -1,3 +1,3 @@
 # Cadams App
 
-https://cadams.app
+https://cadams.tech

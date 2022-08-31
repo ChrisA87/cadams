@@ -1,10 +1,4 @@
 
-def test_get_index_returns_200(client):
-    response = client.get('/')
-    assert response.status_code == 200
-    assert b"Check back soon" in response.data
-
-
 def test_get_stocks_returns_200(client, test_db):
     response = client.get('/sample-stocks')
     assert response.status_code == 200

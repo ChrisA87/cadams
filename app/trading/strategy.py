@@ -30,6 +30,11 @@ class Strategy:
         self.df = df.copy().set_index('date')
         self._fit = False
         self.short_pos = short_pos
+        self._metrics = {}
+
+    @property
+    def metrics(self):
+        return self._metrics
 
     def _dropna(self):
         self.df = self.df.dropna()

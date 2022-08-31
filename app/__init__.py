@@ -28,5 +28,7 @@ def create_app(config_name='default'):
     app.register_blueprint(main)
     from .auth import auth
     app.register_blueprint(auth)
+    from .trading import trading
+    app.register_blueprint(trading)
 
     return app

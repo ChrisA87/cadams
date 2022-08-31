@@ -1,9 +1,9 @@
 import pandas as pd
-from flask import render_template
+from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_required
-from . import trading
+from . import trading, SMA
+from .forms import ParamsSMA
 from ..models.stocks import Stock, StockPrice, starting_stocks
-from . import SMA
 
 
 @trading.route('/stocks')
@@ -27,8 +27,20 @@ def stock_page(symbol):
     return render_template('trading/stock_page.html', stock=stock)
 
 
-@trading.route('/stocks/<symbol>/<strategy>')
-def stock_plot(symbol, strategy):
+@trading.route('/stocks/<symbol>/simple-moving-average', methods=['GET', 'POST'])
+def strategy_sma(symbol):
+    form = ParamsSMA()
+    fast = 42
+    slow = 252
+
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            fast = form.fast.data
+            slow = form.slow.data
+        else:
+            flash('invalid input')
+            redirect(url_for('trading.strategy_sma', symbol=symbol))
+
     stock = Stock.query.filter_by(symbol=symbol).first_or_404()
     base_query = (StockPrice.query
                   .with_entities(StockPrice.date,
@@ -36,6 +48,6 @@ def stock_plot(symbol, strategy):
                   .filter_by(symbol=symbol))
     df = pd.read_sql(base_query.statement, base_query.session.bind)
     sma = SMA(df)
-    sma.fit()
+    sma.fit(fast=fast, slow=slow)
     script, div = sma.get_bokeh_components(stock)
-    return render_template('trading/stock_plot.html', script=script, div=div, stock=stock, strategy=strategy)
+    return render_template('trading/strategy_sma.html', script=script, div=div, stock=stock, form=form, sma=sma)

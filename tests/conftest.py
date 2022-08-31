@@ -11,8 +11,10 @@ from app.models.stocks import Stock, StockPrice, starting_stocks
 def app():
     app = create_app('test')
     app.config["TESTING"] = True
-    app.app_context().push()
+    ctx = app.app_context()
+    ctx.push()
     yield app
+    ctx.pop()
 
 
 @pytest.fixture(scope='module')
@@ -69,3 +71,4 @@ def test_db(app, list_users, list_stocks, list_stock_prices):
     yield db
 
     db.session.remove()
+    db.drop_all()

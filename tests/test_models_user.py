@@ -34,13 +34,13 @@ def test_password_salts_are_random(list_users):
     assert u1.password_hash != u2.password_hash
 
 
-def test_confirm_verify_token__valid(list_users):
+def test_confirm_verify_token__valid(app, list_users):
     u1, *_ = list_users
     token = u1.generate_verify_token()
     assert u1.confirm(token)
 
 
-def test_confirm_verify_token__invalid(list_users):
+def test_confirm_verify_token__invalid(app, list_users):
     u1, u2, _ = list_users
     u1_token = u1.generate_verify_token()
     assert not u2.confirm(u1_token)

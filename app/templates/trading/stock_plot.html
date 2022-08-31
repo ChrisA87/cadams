@@ -21,8 +21,8 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Home</a></li>
-      <li class="breadcrumb-item"><a href="{{ url_for('main.stocks') }}">Stocks</a></li>
-      <li class="breadcrumb-item"><a href="{{ url_for('main.stock_page', symbol=stock.symbol) }}">{{stock.symbol}}</a></li>
+      <li class="breadcrumb-item"><a href="{{ url_for('trading.stocks') }}">Stocks</a></li>
+      <li class="breadcrumb-item"><a href="{{ url_for('trading.stock_page', symbol=stock.symbol) }}">{{stock.symbol}}</a></li>
       <li class="breadcrumb-item active" aria-current="page">{{ strategy }}</li>
     </ol>
   </nav>

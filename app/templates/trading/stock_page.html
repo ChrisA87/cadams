@@ -23,7 +23,7 @@
     <p>Select a trading strategy</p>
 
     <div class="list-group">
-      <a href="{{ url_for('trading.stock_plot', symbol=stock.symbol, strategy='sma') }}" class="list-group-item list-group-item-action" aria-current="true">
+      <a href="{{ url_for('trading.strategy_sma', symbol=stock.symbol) }}" class="list-group-item list-group-item-action" aria-current="true">
         <div class="d-flex w-100 justify-content-between">
           <h5 class="mb-1">Simple Moving Averages (SMA)</h5>
         </div>

@@ -1,0 +1,23 @@
+{% extends "trading/strategy_base.html" %}
+
+{% block title %}{{ super() }} - Simple Moving Average{% endblock title %}
+
+{% block h1 %}
+<h1>Momentum Strategy For {{ stock.symbol.upper() }}</h1>
+{% endblock h1 %}
+
+{% block strategy_definition %}
+<p></p>
+{% endblock strategy_definition %}
+
+{% block custom_params %}
+  <div class="row mb-3 align-items-center">
+    <div class="col-sm-2">
+      {{ form.period.label(class="col-form-label") }}
+      <i tabindex="0" class="fa-regular fa-circle-question" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Period" data-bs-content="The number of rolling days to use for the signal."></i>
+    </div>
+    <div class="col-auto">
+      {{ form.period(class="form-control") }}
+    </div>
+  </div>
+{% endblock custom_params %}

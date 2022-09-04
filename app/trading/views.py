@@ -1,3 +1,4 @@
+from datetime import datetime
 import pandas as pd
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_required
@@ -32,22 +33,27 @@ def strategy_sma(symbol):
     form = ParamsSMA()
     fast = 42
     slow = 252
+    duration = '10Y'
 
     if request.method == 'POST':
         if form.validate_on_submit():
             fast = form.fast.data
             slow = form.slow.data
+            duration = form.duration.data
         else:
             flash('invalid input')
             redirect(url_for('trading.strategy_sma', symbol=symbol))
 
     stock = Stock.query.filter_by(symbol=symbol).first_or_404()
+    start_date = datetime.today() - pd.Timedelta(duration)
     base_query = (StockPrice.query
                   .with_entities(StockPrice.date,
                                  StockPrice.adj_close)
-                  .filter_by(symbol=symbol))
+                  .filter_by(symbol=symbol)
+                  .filter(StockPrice.date >= start_date))
     df = pd.read_sql(base_query.statement, base_query.session.bind)
-    sma = SMA(df)
+    sma = SMA(df, short_pos=-1)
     sma.fit(fast=fast, slow=slow)
-    script, div = sma.get_bokeh_components(stock)
-    return render_template('trading/strategy_sma.html', script=script, div=div, stock=stock, form=form, sma=sma)
+    returns_script, returns_div = sma.get_returns_plot_components(stock)
+    return render_template('trading/strategy_sma.html', returns_script=returns_script, returns_div=returns_div, stock=stock,
+                           form=form, sma=sma)

@@ -1,79 +1,32 @@
-{% extends "base/base.html" %}
+{% extends "trading/strategy_base.html" %}
 
 {% block title %}Cadams - {{ stock.symbol }} - Simple Moving Average{% endblock title %}
 
-{% block styles %}
-{{ super() }}
-<link
-    href="https://cdnjs.cloudflare.com/ajax/libs/bokeh/2.4.3/bokeh.min.css"
-    rel="stylesheet" type="text/css">
-<link
-    href="https://cdnjs.cloudflare.com/ajax/libs/bokeh/2.4.3/bokeh-widgets.css"
-    rel="stylesheet" type="text/css">
-<link
-    href="https://cdnjs.cloudflare.com/ajax/libs/bokeh/2.4.3/bokeh-tables.css"
-    rel="stylesheet" type="text/css">    
-{% endblock styles %}
+{% block h1 %}
+<h1>Simple Moving Average Strategy For {{ stock.symbol.upper() }}</h1>
+{% endblock h1 %}
 
-{% block content %}
-{{ super() }}
-<div class="container">
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Home</a></li>
-      <li class="breadcrumb-item"><a href="{{ url_for('trading.stocks') }}">Stocks</a></li>
-      <li class="breadcrumb-item"><a href="{{ url_for('trading.stock_page', symbol=stock.symbol) }}">{{stock.symbol}}</a></li>
-      <li class="breadcrumb-item active" aria-current="page">SMA</li>
-    </ol>
-  </nav>
-
-  <h1>Simple Moving Average Strategy For {{ stock.symbol.upper() }}</h1>
-
-  <div class="container">
-    <h5>Parameters</h5>
-
-    <form method="POST">
-        {{ form.hidden_tag() }}
-    <div class="row mb-3 align-items-center">
-      <div class="col-auto">
-        {{ form.fast.label(class="col-form-label") }}
-      </div>
-      <div class="col-auto">
-        {{ form.fast(class="form-control") }}
-      </div>
+{% block custom_params %}
+  <div class="row mb-3 align-items-center">
+    <div class="col-sm-2">
+      {{ form.fast.label(class="col-form-label") }}
     </div>
-
-    <div class="row mb-3 align-items-center">
-      <div class="col-auto">
-        {{ form.slow.label(class="col-form-label") }}
-      </div>
-      <div class="col-auto">
-        {{ form.slow(class="form-control") }}
-      </div>
-      <div class="col-auto">
-        <span id="fastHelp" class="form-text">
-          Must be greater than fast moving average.
-        </span>
-      </div>
+    <div class="col-auto">
+      {{ form.fast(class="form-control") }}
     </div>
-
-    {{ form.submit(class="btn btn-primary") }}
-    </form>
   </div>
 
-  <div class="container my-5">
-    <h2>Plot of Price with Moving Averages</h2>
-    {{ div|safe }}
-    {{ script|safe }}
+  <div class="row mb-3 align-items-center">
+    <div class="col-sm-2">
+      {{ form.slow.label(class="col-form-label") }}
+    </div>
+    <div class="col-auto">
+      {{ form.slow(class="form-control") }}
+    </div>
+    <div class="col-auto">
+      <span id="fastHelp" class="form-text">
+        Must be greater than fast moving average.
+      </span>
+    </div>
   </div>
-
-</div>
-
-{% endblock content %}
-
-{% block scripts %}
-{{ super() }}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bokeh/2.4.3/bokeh.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bokeh/2.4.3/bokeh-widgets.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bokeh/2.4.3/bokeh-tables.js"></script>
-{% endblock %}
+{% endblock custom_params %}

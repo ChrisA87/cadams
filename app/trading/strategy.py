@@ -71,32 +71,28 @@ class Strategy:
         self.df.dropna()['position'].plot(**plt_kws)
 
     def _get_plot_title(self, stock):
-        if stock:
-            metric = self.metric.replace('_', ' ').title()
-            return (f'{stock.name} ({stock.symbol}) {metric} Price | {self.fast} and {self.slow} Day Moving Averages | '
-                    f'{self.df.index.min().strftime("%b-%Y")} - {self.df.index.max().strftime("%b-%Y")}')
+        return (f'{stock.name} ({stock.symbol}) Returns | '
+                f'{self.df.index.min().strftime("%b-%Y")} - {self.df.index.max().strftime("%b-%Y")}')
 
-    def get_bokeh_components(self, stock=None):
+    def get_returns_plot_components(self, stock):
         self._check_fitted()
         title = self._get_plot_title(stock)
         p = figure(
             title=title,
             x_axis_label="Date",
-            y_axis_label="Price",
+            y_axis_label="Returns",
             sizing_mode='stretch_width',
-            height=350
+            height=450
         )
 
-        source = ColumnDataSource(self.df.dropna())
-
-        p.line(x='date', y='adj_close', source=source, legend_label="Price")
-        p.line(x='date', y='sma_fast', source=source, color='green', legend_label=f'MA-{self.fast}')
-        p.line(x='date', y='sma_slow', source=source, color='red', legend_label=f'MA-{self.slow}')
+        source = ColumnDataSource(self.df[['returns', 'strategy']].dropna().cumsum().apply(np.exp))
+        p.line(x='date', y='returns', source=source, legend_label='Bought and held', line_width=2)
+        p.line(x='date', y='strategy', source=source, color='green', legend_label='Traded with strategy', line_width=2)
 
         p.legend.location = 'top_left'
 
         # Format x-axis
-        p.yaxis[0].formatter = NumeralTickFormatter(format="$0.00")
+        p.yaxis[0].formatter = NumeralTickFormatter(format="0.00")
         p.xaxis[0].formatter = DatetimeTickFormatter(months="%Y")
 
         return components(p)
@@ -136,6 +132,36 @@ class SMA(Strategy):
         self._check_fitted()
         plt_kws = {} if plt_kws is None else plt_kws
         self.df[[self.metric, 'sma_fast', 'sma_slow']].dropna().plot(**plt_kws)
+
+    def _get_sma_plot_title(self, stock):
+        metric = self.metric.replace('_', ' ').title()
+        return (f'{stock.name} ({stock.symbol}) - {metric} with {self.fast} and {self.slow} day Moving Averages | '
+                f'{self.df.index.min().strftime("%b-%Y")} - {self.df.index.max().strftime("%b-%Y")}')
+
+    def get_sma_plot_components(self, stock):
+        self._check_fitted()
+        title = self._get_sma_plot_title(stock)
+        p = figure(
+            title=title,
+            x_axis_label="Date",
+            y_axis_label="Price",
+            sizing_mode='stretch_width',
+            height=450
+        )
+
+        source = ColumnDataSource(self.df.dropna())
+
+        p.line(x='date', y='adj_close', source=source, legend_label="Price")
+        p.line(x='date', y='sma_fast', source=source, color='green', legend_label=f'MA-{self.fast}')
+        p.line(x='date', y='sma_slow', source=source, color='red', legend_label=f'MA-{self.slow}')
+
+        p.legend.location = 'top_left'
+
+        # Format x-axis
+        p.yaxis[0].formatter = NumeralTickFormatter(format="$0.00")
+        p.xaxis[0].formatter = DatetimeTickFormatter(months="%Y")
+
+        return components(p)
 
 
 class Momentum(Strategy):

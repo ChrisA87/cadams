@@ -1,11 +1,12 @@
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, IntegerField
+from wtforms import SubmitField, IntegerField, SelectField
 from wtforms.validators import DataRequired
 
 
 class ParamsSMA(FlaskForm):
     fast = IntegerField('Fast Moving Average', default=42, validators=[DataRequired()])
     slow = IntegerField('Slow Moving Average', default=252, validators=[DataRequired()])
+    duration = SelectField('Trade duration', choices=['5Y', '10Y'], default='10Y', validators=[DataRequired()])
     submit = SubmitField('Calculate')
 
     def validate(self):

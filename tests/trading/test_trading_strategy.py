@@ -74,10 +74,6 @@ def test_no_date_raises_KeyError(mock_stock_price_df):
         SMA(df)
 
 
-def test_get_plot_title_with_no_stock_is_none(mock_stock_price_df):
-    assert SMA(mock_stock_price_df)._get_plot_title(None) is None
-
-
 @pytest.mark.parametrize('expected_col', ['strategy', 'position', 'returns', 'lag_1', 'lag_2', 'lag_3'])
 def test_ols_fitted_has_expected_columns(mock_stock_price_df, expected_col):
     sma = OLS(mock_stock_price_df)

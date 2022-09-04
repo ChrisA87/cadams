@@ -42,8 +42,9 @@ def register():
         db.session.add(user)
         db.session.commit()
         token = user.generate_verify_token()
+        url = f'https://cadams.tech/auth/verify/{token}'
         send_email(user.email, 'Verify Your Account', 'emails/verify',
-                   user=user, token=token)
+                   user=user, url=url)
         flash('A confirmation email has been sent to you by email.')
         return redirect(url_for('auth.login'))
     return render_template('auth/register.html', form=form)

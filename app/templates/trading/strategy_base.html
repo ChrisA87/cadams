@@ -1,0 +1,96 @@
+{% extends "base/base.html" %}
+
+{% block title %}Cadams - {{ stock.symbol }}{% endblock title%}
+
+{% block styles %}
+{{ super() }}
+<link
+    href="https://cdnjs.cloudflare.com/ajax/libs/bokeh/2.4.3/bokeh.min.css"
+    rel="stylesheet" type="text/css">
+<link
+    href="https://cdnjs.cloudflare.com/ajax/libs/bokeh/2.4.3/bokeh-widgets.css"
+    rel="stylesheet" type="text/css">
+<link
+    href="https://cdnjs.cloudflare.com/ajax/libs/bokeh/2.4.3/bokeh-tables.css"
+    rel="stylesheet" type="text/css">    
+{% endblock styles %}
+
+{% block content %}
+{{ super() }}
+<div class="container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Home</a></li>
+        {% if current_user.is_authenticated %}
+        <li class="breadcrumb-item"><a href="{{ url_for('trading.stocks') }}">Stocks</a></li>
+        {% else %}
+        <li class="breadcrumb-item"><a href="{{ url_for('trading.sample_stocks') }}">Stocks</a></li>  
+        {% endif %}
+      <li class="breadcrumb-item"><a href="{{ url_for('trading.stock_page', symbol=stock.symbol) }}">{{stock.symbol}}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">SMA</li>
+    </ol>
+  </nav>
+
+  {% block h1 %} {% endblock h1 %}
+  {% block strategy_definition %} {% endblock strategy_definition %}
+
+  <div class="container">
+    <h5>Parameters</h5>
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+    {% block custom_params %} {% endblock custom_params %}
+
+    <div class="row mb-3 align-items-left">
+      <div class="col-sm-2">
+        {{ form.duration.label(class="col-form-label") }}
+      </div>
+      <div class="col-auto">
+        {{ form.duration(class="form-control") }}
+      </div>
+    </div>
+
+    {{ form.submit(class="btn btn-primary") }}
+    </form>
+  </div>
+
+  <div class="container my-5">
+    <h2>Estimated Returns</h2>
+    {{ returns_div|safe }}
+    {{ returns_script|safe }}
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Kind</th>
+        <th scope="col">Returns</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Bought and held</td>
+            <td>{{ "%.2f"|format(returns.returns) }}</td>
+        </tr>
+        <tr>
+          <td>Traded with strategy</td>
+          <td>{{ "%.2f"|format(returns.strategy) }}</td>
+      </tr>
+      </tbody>
+  </table>
+  
+  {% block custom_plots %} {% endblock custom_plots %}
+  
+</div>
+
+
+
+{% endblock content %}
+
+{% block scripts %}
+{{ super() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bokeh/2.4.3/bokeh.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bokeh/2.4.3/bokeh-widgets.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bokeh/2.4.3/bokeh-tables.js"></script>
+{% endblock %}

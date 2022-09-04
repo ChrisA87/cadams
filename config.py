@@ -17,7 +17,7 @@ class Config(BaseSettings):
 class DevConfig(Config):
     FLASK_ENV: str = 'development'
     FLASK_DEBUG: bool = True
-    DEBUG_TB_ENABLED: bool = True
+    DEBUG_TB_ENABLED: bool = False
     TEMPLATES_AUTO_RELOAD: bool = True
     SQLALCHEMY_DATABASE_URI: str = f'sqlite:///{basedir}/data-dev.sqlite'
 

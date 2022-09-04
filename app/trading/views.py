@@ -3,9 +3,9 @@ import pandas as pd
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_required
 
-from app.trading.strategy import Momentum
+from app.trading.strategy import MeanReversion, Momentum
 from . import trading, SMA
-from .forms import ParamsSMA, ParamsMomentum
+from .forms import ParamsSMA, ParamsMomentum, ParamsMeanReversion
 from ..models.stocks import Stock, StockPrice, starting_stocks
 
 
@@ -89,3 +89,27 @@ def strategy_momentum(symbol):
     returns_script, returns_div = momentum.get_returns_plot_components(stock)
     return render_template('trading/strategy_momentum.html', returns_script=returns_script, returns_div=returns_div,
                            stock=stock, form=form, momentum=momentum, returns=returns)
+
+
+@trading.route('/stocks/<symbol>/mean-reversion', methods=['GET', 'POST'])
+def strategy_mean_reversion(symbol):
+    form = ParamsMeanReversion()
+    sma = 25
+    threshold = 3.5
+    duration = '10Y'
+
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            sma = form.sma.data
+            threshold = form.threshold.data
+            duration = form.duration.data
+        else:
+            redirect(url_for('trading.strategy_mean_reversion', symbol=symbol))
+
+    stock, prices = get_stock_and_price_data(symbol, duration)
+    mean_rev = MeanReversion(prices, short_pos=-1)
+    mean_rev.fit(sma=sma, threshold=threshold)
+    returns = mean_rev.get_returns().to_dict()
+    returns_script, returns_div = mean_rev.get_returns_plot_components(stock)
+    return render_template('trading/strategy_mean_reversion.html', returns_script=returns_script, returns_div=returns_div,
+                           stock=stock, form=form, mean_rev=mean_rev, returns=returns)

@@ -35,12 +35,11 @@
         </div>
         <!-- <p class="mb-1">Some placeholder content in a paragraph.</p> -->
       </a>
-      <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+      <a href="{{ url_for('trading.strategy_mean_reversion', symbol=stock.symbol) }}" class="list-group-item list-group-item-action" aria-current="true">
         <div class="d-flex w-100 justify-content-between">
           <h5 class="mb-1">Mean Reversion</h5>
         </div>
         <!-- <p class="mb-1">Some placeholder content in a paragraph.</p> -->
-        <small>coming soon</small>
       </a>
       <a href="#" class="list-group-item list-group-item-action" aria-current="true">
         <div class="d-flex w-100 justify-content-between">

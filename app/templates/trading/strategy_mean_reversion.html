@@ -1,0 +1,33 @@
+{% extends "trading/strategy_base.html" %}
+
+{% block title %}{{ super() }} - Simple Moving Average{% endblock title %}
+
+{% block h1 %}
+<h1>Mean Reversion Strategy For {{ stock.symbol.upper() }}</h1>
+{% endblock h1 %}
+
+{% block strategy_definition %}
+<p></p>
+{% endblock strategy_definition %}
+
+{% block custom_params %}
+  <div class="row mb-3 align-items-center">
+    <div class="col-sm-2">
+      {{ form.sma.label(class="col-form-label") }}
+      <!-- <i tabindex="0" class="fa-regular fa-circle-question" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Fast MA" data-bs-content="The moving average over a short period."></i> -->
+    </div>
+    <div class="col-auto">
+      {{ form.sma(class="form-control") }}
+    </div>
+  </div>
+
+  <div class="row mb-3 align-items-center">
+    <div class="col-sm-2">
+      {{ form.threshold.label(class="col-form-label") }}
+      <!-- <i tabindex="0" class="fa-regular fa-circle-question" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Slow MA" data-bs-content="The moving average over a long period."></i> -->
+    </div>
+    <div class="col-auto">
+      {{ form.threshold(class="form-control") }}
+    </div>
+  </div>
+{% endblock custom_params %}

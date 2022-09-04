@@ -15,3 +15,9 @@ class ParamsSMA(FlaskForm):
             self.fast.errors.append('Fast moving average must be smaller than slow moving average')
             return False
         return True
+
+
+class ParamsMomentum(FlaskForm):
+    period = IntegerField('Period', default=3, validators=[DataRequired()])
+    duration = SelectField('Trade duration', choices=['5Y', '10Y'], default='10Y', validators=[DataRequired()])
+    submit = SubmitField('Calculate')

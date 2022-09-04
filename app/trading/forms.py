@@ -1,13 +1,18 @@
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, IntegerField, SelectField
+from wtforms import SubmitField, IntegerField, SelectField, FloatField
 from wtforms.validators import DataRequired
 
 
-class ParamsSMA(FlaskForm):
-    fast = IntegerField('Fast Moving Average', default=42, validators=[DataRequired()])
-    slow = IntegerField('Slow Moving Average', default=252, validators=[DataRequired()])
+class ParamsBase(FlaskForm):
+    """Base parameters common to all trading strategies."""
     duration = SelectField('Trade duration', choices=['5Y', '10Y'], default='10Y', validators=[DataRequired()])
     submit = SubmitField('Calculate')
+
+
+class ParamsSMA(ParamsBase):
+    """Simple Moving Average trading strategy parameters."""
+    fast = IntegerField('Fast Moving Average', default=42, validators=[DataRequired()])
+    slow = IntegerField('Slow Moving Average', default=252, validators=[DataRequired()])
 
     def validate(self):
         super().validate()
@@ -17,7 +22,12 @@ class ParamsSMA(FlaskForm):
         return True
 
 
-class ParamsMomentum(FlaskForm):
+class ParamsMomentum(ParamsBase):
+    """Momentum trading strategy parameters"""
     period = IntegerField('Period', default=3, validators=[DataRequired()])
-    duration = SelectField('Trade duration', choices=['5Y', '10Y'], default='10Y', validators=[DataRequired()])
-    submit = SubmitField('Calculate')
+
+
+class ParamsMeanReversion(ParamsBase):
+    """Mean Reversion trading strategy parameters."""
+    sma = IntegerField('Simple Moving Average', default=25, validators=[DataRequired()])
+    threshold = FloatField('Threshold', default=3.5, validators=[DataRequired()])

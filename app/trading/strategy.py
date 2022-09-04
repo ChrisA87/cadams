@@ -133,9 +133,14 @@ class SMA(Strategy):
         plt_kws = {} if plt_kws is None else plt_kws
         self.df[[self.metric, 'sma_fast', 'sma_slow']].dropna().plot(**plt_kws)
 
-    def get_sma_plot_components(self, stock=None):
+    def _get_sma_plot_title(self, stock):
+        metric = self.metric.replace('_', ' ').title()
+        return (f'{stock.name} ({stock.symbol}) - {metric} with {self.fast} and {self.slow} day Moving Averages | '
+                f'{self.df.index.min().strftime("%b-%Y")} - {self.df.index.max().strftime("%b-%Y")}')
+
+    def get_sma_plot_components(self, stock):
         self._check_fitted()
-        title = self._get_plot_title(stock)
+        title = self._get_sma_plot_title(stock)
         p = figure(
             title=title,
             x_axis_label="Date",

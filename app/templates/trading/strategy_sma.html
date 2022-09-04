@@ -1,10 +1,14 @@
 {% extends "trading/strategy_base.html" %}
 
-{% block title %}Cadams - {{ stock.symbol }} - Simple Moving Average{% endblock title %}
+{% block title %}{{ super() }} - Simple Moving Average{% endblock title %}
 
 {% block h1 %}
 <h1>Simple Moving Average Strategy For {{ stock.symbol.upper() }}</h1>
 {% endblock h1 %}
+
+{% block strategy_definition %}
+<p></p>
+{% endblock strategy_definition %}
 
 {% block custom_params %}
   <div class="row mb-3 align-items-center">
@@ -30,3 +34,11 @@
     </div>
   </div>
 {% endblock custom_params %}
+
+{% block custom_plots %}
+<div class="container my-5">
+  <h2>{{ stock.name }} Price and Moving Averages</h2>
+  {{ sma_div|safe }}
+  {{ sma_script|safe }}
+</div>
+{% endblock custom_plots %}

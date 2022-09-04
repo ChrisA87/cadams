@@ -1,5 +1,7 @@
 {% extends "base/base.html" %}
 
+{% block title %}Cadams - {{ stock.symbol }}{% endblock title%}
+
 {% block styles %}
 {{ super() }}
 <link
@@ -30,6 +32,7 @@
   </nav>
 
   {% block h1 %} {% endblock h1 %}
+  {% block strategy_definition %} {% endblock strategy_definition %}
 
   <div class="container">
     <h5>Parameters</h5>
@@ -37,9 +40,7 @@
     <form method="POST">
         {{ form.hidden_tag() }}
 
-    {% block custom_params %}
-
-    {% endblock custom_params %}
+    {% block custom_params %} {% endblock custom_params %}
 
     <div class="row mb-3 align-items-left">
       <div class="col-sm-2">
@@ -59,10 +60,31 @@
     {{ returns_div|safe }}
     {{ returns_script|safe }}
   </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Kind</th>
+        <th scope="col">Returns</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Bought and held</td>
+            <td>{{ "%.2f"|format(returns.returns) }}</td>
+        </tr>
+        <tr>
+          <td>Traded with strategy</td>
+          <td>{{ "%.2f"|format(returns.strategy) }}</td>
+      </tr>
+      </tbody>
+  </table>
+  
+  {% block custom_plots %} {% endblock custom_plots %}
+  
 </div>
 
-{% block custom_plots %}
-{% endblock custom_plots %}
+
 
 {% endblock content %}
 

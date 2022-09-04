@@ -54,6 +54,8 @@ def strategy_sma(symbol):
     df = pd.read_sql(base_query.statement, base_query.session.bind)
     sma = SMA(df, short_pos=-1)
     sma.fit(fast=fast, slow=slow)
+    returns = sma.get_returns().to_dict()
     returns_script, returns_div = sma.get_returns_plot_components(stock)
+    sma_script, sma_div = sma.get_sma_plot_components(stock)
     return render_template('trading/strategy_sma.html', returns_script=returns_script, returns_div=returns_div, stock=stock,
-                           form=form, sma=sma)
+                           form=form, sma=sma, returns=returns, sma_script=sma_script, sma_div=sma_div)

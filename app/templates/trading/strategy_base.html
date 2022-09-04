@@ -45,6 +45,7 @@
     <div class="row mb-3 align-items-left">
       <div class="col-sm-2">
         {{ form.duration.label(class="col-form-label") }}
+        <i tabindex="0" class="fa-regular fa-circle-question" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Duration" data-bs-content="The number of years to hold or trade the financial instrument."></i>
       </div>
       <div class="col-auto">
         {{ form.duration(class="form-control") }}
@@ -93,4 +94,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bokeh/2.4.3/bokeh.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bokeh/2.4.3/bokeh-widgets.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bokeh/2.4.3/bokeh-tables.js"></script>
+    <script src="{{ url_for('static', filename='custom.js') }}"></script>
 {% endblock %}

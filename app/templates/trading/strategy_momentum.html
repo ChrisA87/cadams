@@ -14,6 +14,7 @@
   <div class="row mb-3 align-items-center">
     <div class="col-sm-2">
       {{ form.period.label(class="col-form-label") }}
+      <i tabindex="0" class="fa-regular fa-circle-question" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Period" data-bs-content="The number of rolling days to use for the signal."></i>
     </div>
     <div class="col-auto">
       {{ form.period(class="form-control") }}

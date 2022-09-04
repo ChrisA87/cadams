@@ -68,6 +68,7 @@ def strategy_sma(symbol):
     return render_template('trading/strategy_sma.html', returns_script=returns_script, returns_div=returns_div, stock=stock,
                            form=form, sma=sma, returns=returns, sma_script=sma_script, sma_div=sma_div)
 
+
 @trading.route('/stocks/<symbol>/momentum', methods=['GET', 'POST'])
 def strategy_momentum(symbol):
     form = ParamsMomentum()
@@ -86,5 +87,5 @@ def strategy_momentum(symbol):
     momentum.fit(period=period)
     returns = momentum.get_returns().to_dict()
     returns_script, returns_div = momentum.get_returns_plot_components(stock)
-    return render_template('trading/strategy_momentum.html', returns_script=returns_script, returns_div=returns_div, stock=stock,
-                           form=form, momentum=momentum, returns=returns)
+    return render_template('trading/strategy_momentum.html', returns_script=returns_script, returns_div=returns_div,
+                           stock=stock, form=form, momentum=momentum, returns=returns)

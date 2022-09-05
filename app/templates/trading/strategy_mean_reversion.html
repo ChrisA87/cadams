@@ -31,3 +31,11 @@
     </div>
   </div>
 {% endblock custom_params %}
+
+{% block custom_plots %}
+<div class="container my-5">
+  <h2>{{ stock.name }} Price Distance From Mean</h2>
+  {{ distance_div|safe }}
+  {{ distance_script|safe }}
+</div>
+{% endblock custom_plots %}

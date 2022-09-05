@@ -111,5 +111,7 @@ def strategy_mean_reversion(symbol):
     mean_rev.fit(sma=sma, threshold=threshold)
     returns = mean_rev.get_returns().to_dict()
     returns_script, returns_div = mean_rev.get_returns_plot_components(stock)
+    distance_script, distance_div = mean_rev.get_distance_plot_components(stock)
     return render_template('trading/strategy_mean_reversion.html', returns_script=returns_script, returns_div=returns_div,
-                           stock=stock, form=form, mean_rev=mean_rev, returns=returns)
+                           stock=stock, form=form, mean_rev=mean_rev, returns=returns, distance_script=distance_script,
+                           distance_div=distance_div)

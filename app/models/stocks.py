@@ -64,7 +64,7 @@ class StockPrice(db.Model):
                            .scalar())
 
         if latest_date is None:
-            latest_date = datetime.now() - timedelta(days=365*10)
+            latest_date = (datetime.now() - timedelta(days=365*10)).date()
 
         return latest_date
 

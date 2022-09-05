@@ -9,7 +9,7 @@ Date: 27 May 2022
 import numpy as np
 import matplotlib.pyplot as plt
 from bokeh.plotting import figure, ColumnDataSource
-from bokeh.models import DatetimeTickFormatter, NumeralTickFormatter
+from bokeh.models import DatetimeTickFormatter, NumeralTickFormatter, Span
 from bokeh.embed import components
 from ..models.errors import NotFittedError
 
@@ -209,6 +209,34 @@ class MeanReversion(Strategy):
         plt.axhline(self.threshold, color='r')
         plt.axhline(-self.threshold, color='r')
         plt.axhline(0, color='k', linestyle='--')
+
+    def get_distance_plot_components(self, stock):
+        self._check_fitted()
+        title = f"{stock.name} ({stock.symbol}) Price - Distance From Mean"
+        p = figure(
+            title=title,
+            x_axis_label="Date",
+            y_axis_label="Distance",
+            sizing_mode='stretch_width',
+            height=450
+        )
+
+        source = ColumnDataSource(self.df.dropna())
+
+        p.line(x='date', y='distance', source=source, legend_label="Distance from mean", line_width=2)
+        upper_threhold = Span(location=self.threshold, dimension='width', line_color='red', line_width=1)
+        lower_threhold = Span(location=-self.threshold, dimension='width', line_color='red', line_width=1)
+        mean = Span(location=0, dimension='width', line_color='grey', line_width=1, line_dash='dashed')
+
+        p.legend.location = 'top_left'
+
+        # Format x-axis
+        p.yaxis[0].formatter = NumeralTickFormatter(format="$0.00")
+        p.xaxis[0].formatter = DatetimeTickFormatter(months="%Y")
+
+        p.renderers.extend([upper_threhold, lower_threhold, mean])
+
+        return components(p)
 
 
 class OLS(Strategy):

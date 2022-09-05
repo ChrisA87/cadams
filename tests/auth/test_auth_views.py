@@ -17,7 +17,7 @@ def test_get_register_returns_200(client):
     assert b"Confirm Password" in response.data
 
 
-def test_post_register_returns_returns_302(client, test_db):
+def test_post_register_returns_302(client, test_db):
     response = client.post('/auth/register',
                            data={'username': 'joe',
                                  'email': 'joe@example.com',
@@ -27,7 +27,7 @@ def test_post_register_returns_returns_302(client, test_db):
     assert response.status_code == 302
 
 
-def test_post_register_returns_returns_200__username_taken(client, test_db):
+def test_post_register_returns_200__username_taken(client, test_db):
     client.post('/auth/register',
                 data={'username': 'joe',
                       'email': 'joe@example.com',

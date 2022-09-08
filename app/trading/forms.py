@@ -32,6 +32,7 @@ class ParamsMeanReversion(ParamsBase):
     sma = IntegerField('Simple Moving Average', default=25, validators=[DataRequired()])
     threshold = FloatField('Threshold', default=3.5, validators=[DataRequired()])
 
+
 class ParamsOLS(ParamsBase):
     """OLS trading strategy parameters."""
     lags = IntegerField('Lags', default=5, validators=[DataRequired()])

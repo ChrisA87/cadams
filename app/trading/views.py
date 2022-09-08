@@ -3,9 +3,9 @@ import pandas as pd
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_required
 
-from app.trading.strategy import MeanReversion, Momentum
+from app.trading.strategy import OLS, MeanReversion, Momentum
 from . import trading, SMA
-from .forms import ParamsSMA, ParamsMomentum, ParamsMeanReversion
+from .forms import ParamsOLS, ParamsSMA, ParamsMomentum, ParamsMeanReversion
 from ..models.stocks import Stock, StockPrice, starting_stocks
 
 
@@ -115,3 +115,25 @@ def strategy_mean_reversion(symbol):
     return render_template('trading/strategy_mean_reversion.html', returns_script=returns_script, returns_div=returns_div,
                            stock=stock, form=form, mean_rev=mean_rev, returns=returns, distance_script=distance_script,
                            distance_div=distance_div)
+
+
+@trading.route('/stocks/<symbol>/ols', methods=['GET', 'POST'])
+def strategy_ols(symbol):
+    form = ParamsOLS()
+    lags = 5
+    duration = '10Y'
+
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            lags = form.lags.data
+            duration = form.duration.data
+        else:
+            redirect(url_for('trading.strategy_ols', symbol=symbol))
+
+    stock, prices = get_stock_and_price_data(symbol, duration)
+    ols = OLS(prices, short_pos=-1)
+    ols.fit(lags=lags)
+    returns = ols.get_returns().to_dict()
+    returns_script, returns_div = ols.get_returns_plot_components(stock)
+    return render_template('trading/strategy_ols.html', returns_script=returns_script, returns_div=returns_div,
+                           stock=stock, form=form, ols=ols, returns=returns)

@@ -44,3 +44,13 @@ def test_confirm_verify_token__invalid(app, list_users):
     u1, u2, _ = list_users
     u1_token = u1.generate_verify_token()
     assert not u2.confirm(u1_token)
+
+
+def test_confirm_exception(app, list_users):
+    u1, *_ = list_users
+    assert not u1.confirm(None)
+
+
+def test_user_repr(app, list_users):
+    u1, *_ = list_users
+    assert u1.__repr__() == '<User John (1)>'

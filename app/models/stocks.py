@@ -58,7 +58,7 @@ class StockPrice(db.Model):
                             .group_by(StockPrice.symbol)
                             .all())
             if latest_dates:
-               return min([x for _, x in latest_dates])
+                return min([x for _, x in latest_dates])
         else:
             latest_date = (StockPrice.query
                            .filter_by(symbol=symbol)

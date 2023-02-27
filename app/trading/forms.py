@@ -5,7 +5,7 @@ from wtforms.validators import DataRequired
 
 class ParamsBase(FlaskForm):
     """Base parameters common to all trading strategies."""
-    duration = SelectField('Trade duration', choices=['5Y', '10Y'], default='10Y', validators=[DataRequired()])
+    duration = SelectField('Trade duration (years)', choices=[5, 10], default=10, validators=[DataRequired()])
     submit = SubmitField('Calculate')
 
 

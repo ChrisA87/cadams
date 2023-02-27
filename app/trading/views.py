@@ -10,9 +10,9 @@ from ..models.stocks import Stock, StockPrice, starting_stocks
 
 
 def get_stock_and_price_data(symbol, duration=None):
-    duration = '10Y' if duration is None else duration
+    duration = 10 if duration is None else int(duration)
     stock = Stock.query.filter_by(symbol=symbol).first_or_404()
-    start_date = datetime.today() - pd.Timedelta(duration)
+    start_date = datetime.today() - pd.Timedelta(days=365 * duration)
     base_query = (StockPrice.query
                   .with_entities(StockPrice.date,
                                  StockPrice.adj_close)
@@ -48,7 +48,7 @@ def strategy_sma(symbol):
     form = ParamsSMA()
     fast = 42
     slow = 252
-    duration = '10Y'
+    duration = '10'
 
     if request.method == 'POST':
         if form.validate_on_submit():
@@ -73,7 +73,7 @@ def strategy_sma(symbol):
 def strategy_momentum(symbol):
     form = ParamsMomentum()
     period = 3
-    duration = '10Y'
+    duration = '10'
 
     if request.method == 'POST':
         if form.validate_on_submit():
@@ -96,7 +96,7 @@ def strategy_mean_reversion(symbol):
     form = ParamsMeanReversion()
     sma = 25
     threshold = 3.5
-    duration = '10Y'
+    duration = '10'
 
     if request.method == 'POST':
         if form.validate_on_submit():
@@ -121,7 +121,7 @@ def strategy_mean_reversion(symbol):
 def strategy_ols(symbol):
     form = ParamsOLS()
     lags = 5
-    duration = '10Y'
+    duration = '10'
 
     if request.method == 'POST':
         if form.validate_on_submit():

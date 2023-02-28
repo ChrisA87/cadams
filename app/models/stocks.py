@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 import pandas_datareader as pdr
+import yfinance as yf
 from pandas import MultiIndex
 from sqlalchemy import func
 from .. import db
@@ -74,7 +75,10 @@ class StockPrice(db.Model):
     def get_price_data(symbols, start_date):
         if symbols is None:
             symbols = [x for x, *_ in Stock.query.with_entities(Stock.symbol).all()]
-        data = pdr.yahoo.daily.YahooDailyReader(symbols=symbols, start=start_date).read()
+        try:
+            data = pdr.yahoo.daily.YahooDailyReader(symbols=symbols, start=start_date).read()
+        except TypeError:
+            data = yf.download(tickers=symbols, start=start_date)
         return data
 
     @staticmethod

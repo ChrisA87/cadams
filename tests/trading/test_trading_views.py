@@ -96,6 +96,7 @@ def test_valid_post_mean_reversion_strategy_returns_200(client, test_db):
     assert response.status_code == 200
     assert b'Mean Reversion Strategy For CADM' in response.data
 
+
 ##################################################################################
 # OLS
 def test_valid_get_ols_strategy_returns_200(client, test_db):

@@ -70,6 +70,31 @@
   {% block page_content %}
   {% endblock %}
 </div>
+
+{% endblock %}
+{% block footer %}
+<div class="container">
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <div class="col-md-4 d-flex align-items-center">
+      <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+        <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+      </a>
+      <span class="text-muted">© 2023 Cadams</span>
+    </div>
+
+    <ul class="nav col-md-1 justify-content-evenly  align-items-center d-flex">
+      <a href="https://uk.linkedin.com/in/chris-adams-b88557b3" class="text-muted text-decoration-none">
+        <i class="fa-brands fa-linkedin fa-xl"></i>
+      </a>
+      <a href="https://github.com/ChrisA87" class="text-muted text-decoration-none">
+        <i class="fa-brands fa-github fa-xl"></i>
+      </a>
+      <a href="https://stackoverflow.com/users/10201580/chris-adams" class="text-muted text-decoration-none">
+        <i class="fa-brands fa-stack-overflow fa-xl"></i>
+      </a>
+    </ul>
+  </footer>
+</div>
 {% endblock %}
 
 {% block scripts %}

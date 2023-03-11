@@ -65,8 +65,16 @@ def strategy_sma(symbol):
     returns = sma.get_returns().to_dict()
     returns_script, returns_div = sma.get_returns_plot_components(stock)
     sma_script, sma_div = sma.get_sma_plot_components(stock)
-    return render_template('trading/strategy_sma.html', returns_script=returns_script, returns_div=returns_div, stock=stock,
-                           form=form, sma=sma, returns=returns, sma_script=sma_script, sma_div=sma_div)
+    return render_template(
+        'trading/strategy_sma.html',
+        returns_script=returns_script,
+        returns_div=returns_div,
+        stock=stock,
+        form=form,
+        sma=sma,
+        returns=returns,
+        sma_script=sma_script,
+        sma_div=sma_div)
 
 
 @trading.route('/stocks/<symbol>/momentum', methods=['GET', 'POST'])
@@ -87,15 +95,21 @@ def strategy_momentum(symbol):
     momentum.fit(period=period)
     returns = momentum.get_returns().to_dict()
     returns_script, returns_div = momentum.get_returns_plot_components(stock)
-    return render_template('trading/strategy_momentum.html', returns_script=returns_script, returns_div=returns_div,
-                           stock=stock, form=form, momentum=momentum, returns=returns)
+    return render_template(
+        'trading/strategy_momentum.html',
+        returns_script=returns_script,
+        returns_div=returns_div,
+        stock=stock,
+        form=form,
+        momentum=momentum,
+        returns=returns)
 
 
 @trading.route('/stocks/<symbol>/mean-reversion', methods=['GET', 'POST'])
 def strategy_mean_reversion(symbol):
     form = ParamsMeanReversion()
-    sma = 25
-    threshold = 3.5
+    sma = 28
+    threshold = 3.0
     duration = '10'
 
     if request.method == 'POST':
@@ -112,15 +126,22 @@ def strategy_mean_reversion(symbol):
     returns = mean_rev.get_returns().to_dict()
     returns_script, returns_div = mean_rev.get_returns_plot_components(stock)
     distance_script, distance_div = mean_rev.get_distance_plot_components(stock)
-    return render_template('trading/strategy_mean_reversion.html', returns_script=returns_script, returns_div=returns_div,
-                           stock=stock, form=form, mean_rev=mean_rev, returns=returns, distance_script=distance_script,
-                           distance_div=distance_div)
+    return render_template(
+        'trading/strategy_mean_reversion.html',
+        returns_script=returns_script,
+        returns_div=returns_div,
+        stock=stock,
+        form=form,
+        mean_rev=mean_rev,
+        returns=returns,
+        distance_script=distance_script,
+        distance_div=distance_div)
 
 
 @trading.route('/stocks/<symbol>/ols', methods=['GET', 'POST'])
 def strategy_ols(symbol):
     form = ParamsOLS()
-    lags = 5
+    lags = 7
     duration = '10'
 
     if request.method == 'POST':
@@ -135,5 +156,11 @@ def strategy_ols(symbol):
     ols.fit(lags=lags)
     returns = ols.get_returns().to_dict()
     returns_script, returns_div = ols.get_returns_plot_components(stock)
-    return render_template('trading/strategy_ols.html', returns_script=returns_script, returns_div=returns_div,
-                           stock=stock, form=form, ols=ols, returns=returns)
+    return render_template(
+        'trading/strategy_ols.html',
+        returns_script=returns_script,
+        returns_div=returns_div,
+        stock=stock,
+        form=form,
+        ols=ols,
+        returns=returns)

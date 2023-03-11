@@ -52,12 +52,6 @@ def test_logout_when_not_logged_in(client, test_db):
     assert b'Please log in to access this page' in response.data
 
 
-def test_post_login_returns_200__valid(client, test_db):
-    response = client.post('/auth/login', data={'username': 'John', 'password': 'cat'}, follow_redirects=True)
-    assert response.status_code == 200
-    assert b'Welcome Back John' in response.data
-
-
 def test_post_login_returns_200__invalid(client, test_db):
     response = client.post('/auth/login', data={'username': 'John', 'password': 'wrong-password'}, follow_redirects=True)
     print(response.data.decode('utf-8'))

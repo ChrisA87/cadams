@@ -1,4 +1,4 @@
-.PHONY: test lint
+.PHONY: test lint docker-build docker-run
 
 default: lint test
 
@@ -19,6 +19,15 @@ docker-build:
 	docker build -t chrisa87/cadams .
 
 docker-run:
-	docker run -p 8000:8000 --rm chrisa87/cadams
+	docker run -v "$$(pwd)/data-dev.sqlite:/app/data-dev.sqlite" -p 8000:8000 --name cadams-web --rm chrisa87/cadams
 
 docker: docker-build docker-run
+
+run:
+	export FLASK_APP=run_app.py; flask run --reload
+
+db-init:
+	export FLASK_APP=run_app.py; \
+	export PYTHONPATH=".:$$PYTHONPATH"; \
+	flask db upgrade; \
+	python app/db/setup.py;

@@ -4,7 +4,7 @@ from app.models.stocks import Stock, StockPrice
 
 
 def main():
-    app = create_app(os.environ.get('FLASK_ENV', 'default')) 
+    app = create_app(os.environ.get('FLASK_ENV', 'default'))
     with app.app_context():
         print('Inserting starter stocks...', end=' ')
         Stock.insert_stocks()

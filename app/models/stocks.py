@@ -31,14 +31,18 @@ class Stock(db.Model):
                 stock = Stock(symbol=symbol, name=name, last_updated=None)
                 db.session.add(stock)
                 db.session.commit()
-                
+
     def update(self):
         today = date.today()
         if self.last_updated is None or self.last_updated.date() < today:
-            StockPrice.update(self.symbol)
-            self.last_updated = today
-            db.session.add(self)
-            db.session.commit()
+            try:
+                StockPrice.update(self.symbol)
+                self.last_updated = today
+                db.session.add(self)
+                db.session.commit()
+            except Exception:
+                # TODO - proper exception handling and logging here
+                pass
 
     def __repr__(self):
         return f"<Stock[{self.id}]: {self.name} ({self.symbol})>"

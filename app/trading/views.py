@@ -40,6 +40,7 @@ def sample_stocks():
 @trading.route('/stocks/<symbol>')
 def stock_page(symbol):
     stock = Stock.query.filter_by(symbol=symbol).first_or_404()
+    stock.update()
     return render_template('trading/stock_page.html', stock=stock)
 
 
@@ -60,6 +61,7 @@ def strategy_sma(symbol):
             redirect(url_for('trading.strategy_sma', symbol=symbol))
 
     stock, prices = get_stock_and_price_data(symbol, duration)
+    stock.update()
     sma = SMA(prices, short_pos=-1)
     sma.fit(fast=fast, slow=slow)
     returns = sma.get_returns().to_dict()
@@ -91,6 +93,7 @@ def strategy_momentum(symbol):
             redirect(url_for('trading.strategy_momentum', symbol=symbol))
 
     stock, prices = get_stock_and_price_data(symbol, duration)
+    stock.update()
     momentum = Momentum(prices, short_pos=-1)
     momentum.fit(period=period)
     returns = momentum.get_returns().to_dict()
@@ -121,6 +124,7 @@ def strategy_mean_reversion(symbol):
             redirect(url_for('trading.strategy_mean_reversion', symbol=symbol))
 
     stock, prices = get_stock_and_price_data(symbol, duration)
+    stock.update()
     mean_rev = MeanReversion(prices, short_pos=-1)
     mean_rev.fit(sma=sma, threshold=threshold)
     returns = mean_rev.get_returns().to_dict()
@@ -152,6 +156,7 @@ def strategy_ols(symbol):
             redirect(url_for('trading.strategy_ols', symbol=symbol))
 
     stock, prices = get_stock_and_price_data(symbol, duration)
+    stock.update()
     ols = OLS(prices, short_pos=-1)
     ols.fit(lags=lags)
     returns = ols.get_returns().to_dict()

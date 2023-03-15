@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 import pandas_datareader as pdr
 import yfinance as yf
 from pandas import MultiIndex
@@ -21,15 +21,24 @@ class Stock(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     symbol = db.Column(db.String(64), unique=True)
     name = db.Column(db.String(64), unique=True)
+    last_updated = db.Column(db.DateTime())
 
     @staticmethod
     def insert_stocks(stocks=starting_stocks):
         for symbol, name in stocks:
             stock = Stock.query.filter_by(symbol=symbol).first()
             if stock is None:
-                stock = Stock(symbol=symbol, name=name)
+                stock = Stock(symbol=symbol, name=name, last_updated=None)
                 db.session.add(stock)
                 db.session.commit()
+                
+    def update(self):
+        today = date.today()
+        if self.last_updated is None or self.last_updated.date() < today:
+            StockPrice.update(self.symbol)
+            self.last_updated = today
+            db.session.add(self)
+            db.session.commit()
 
     def __repr__(self):
         return f"<Stock[{self.id}]: {self.name} ({self.symbol})>"

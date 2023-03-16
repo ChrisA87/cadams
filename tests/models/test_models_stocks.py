@@ -2,6 +2,7 @@ import pytest
 from datetime import datetime, timedelta
 import pandas as pd
 import numpy as np
+from freezegun import freeze_time
 from app.models.stocks import Stock, StockPrice
 
 
@@ -21,6 +22,15 @@ def generate_mock_price_data(symbols, start_date, periods=5):
 def test_stock_repr():
     stock = Stock(id=1, symbol='TST', name='Testing Stock')
     assert stock.__repr__() == '<Stock[1]: Testing Stock (TST)>'
+
+
+@freeze_time('2023-01-01 13:00')
+def test_stock_update(monkeypatch, test_db):
+    monkeypatch.setattr(StockPrice, 'update', lambda x: None)
+    stock = Stock(symbol='CDMS', name='Cadams Stock')
+    assert stock.last_updated is None
+    stock.update()
+    assert stock.last_updated == datetime(2023, 1, 1)
 
 
 def test_stock_price_repr():

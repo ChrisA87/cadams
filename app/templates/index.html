@@ -6,7 +6,13 @@
 {{ super() }}
 <main class="container">
     <div class="p-4 p-md-5 mb-4 rounded text-bg-dark">
-        <h1 class="display-2 fst-italic">Trading Ideas</h1>
+        <h1 class="display-2 fst-italic">
+            {% if current_user.is_authenticated %}
+            Welcome Back {{ current_user.username }}
+            {% else %}
+            Trading Ideas
+            {% endif %}
+        </h1>
     </div>
     <div class="row mb-2">
         <div class="col-md-6">

@@ -35,12 +35,15 @@ email-validator==1.2.1
 flask==2.1.2
     # via
     #   -r requirements/requirements.in
+    #   flask-admin
     #   flask-debugtoolbar
     #   flask-login
     #   flask-mail
     #   flask-migrate
     #   flask-sqlalchemy
     #   flask-wtf
+flask-admin==1.6.1
+    # via -r requirements/requirements.in
 flask-debugtoolbar==0.13.1
     # via -r requirements/requirements.in
 flask-login==0.6.1
@@ -171,7 +174,9 @@ werkzeug==2.1.2
     #   flask-debugtoolbar
     #   flask-login
 wtforms==3.0.1
-    # via flask-wtf
+    # via
+    #   flask-admin
+    #   flask-wtf
 yfinance==0.2.12
     # via -r requirements/requirements.in
 

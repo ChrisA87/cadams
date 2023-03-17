@@ -26,10 +26,11 @@ def create_app(config_name='default'):
 
     # Set up admin page
     from .auth.admin import AdminModelView, CustomAdminIndexView
-    from .models import users, stocks
+    from .models import users, stocks, roles
     admin = Admin(template_mode='bootstrap3', index_view=CustomAdminIndexView(url='/auth/admin'))
     admin.init_app(app)
     admin.add_view(AdminModelView(users.User, db.session))
+    admin.add_view(AdminModelView(roles.Role, db.session))
     admin.add_view(AdminModelView(stocks.Stock, db.session))
     admin.add_view(AdminModelView(stocks.StockPrice, db.session))
 

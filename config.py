@@ -8,6 +8,7 @@ class Config(BaseSettings):
     SECRET_KEY: str = 'secret-key'
     SQLALCHEMY_TRACK_MODIFICATIONS: bool = False
     SENDGRID_API_KEY: str = 'secret-api-key'
+    FLASK_ADMIN_SWATCH: str = 'cerulean'
 
     @staticmethod
     def init_app(app):

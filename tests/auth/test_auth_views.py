@@ -107,3 +107,37 @@ def test_user_confirm_token__invalid(client, test_db):
     response = client.get(f'auth/verify/{token}', follow_redirects=True)
     assert response.status_code == 200
     assert b'The confirmation link is invalid' in response.data
+
+
+def test_admin_page__not_logged_in_redirected_to_login(client, test_db):
+    response = client.get('/auth/admin', follow_redirects=True)
+    assert response.status_code == 200
+    assert b'Log In' in response.data
+    assert b'Username' in response.data
+    assert b'Password' in response.data
+
+
+def test_admin_page__logged_in_but_not_admin_redirected_to_login(client, test_db, list_users):
+    non_admin, *_ = list_users
+    client.post('/auth/login', data={'username': non_admin.username, 'password': 'cat'},
+                follow_redirects=True)
+    response = client.get('/auth/admin', follow_redirects=True)
+    assert response.status_code == 200
+    assert b'Log In' in response.data
+    assert b'Username' in response.data
+    assert b'Password' in response.data
+
+
+def test_admin_page__logged_in_admin_user_gets_admin_panel(client, test_db, list_users):
+    *_, admin_user = list_users
+    client.post('/auth/login', data={'username': admin_user.username, 'password': 'rabbit'},
+                follow_redirects=True)
+
+    response = client.get('/auth/admin', follow_redirects=True)
+    assert response.status_code == 200
+    assert b'Home - Admin' in response.data
+
+    response = client.get('/auth/admin/user', follow_redirects=True)
+    assert response.status_code == 200
+    for user in list_users:
+        assert user.email.encode() in response.data

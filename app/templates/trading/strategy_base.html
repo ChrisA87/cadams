@@ -27,7 +27,7 @@
         <li class="breadcrumb-item"><a href="{{ url_for('trading.sample_stocks') }}">Stocks</a></li>  
         {% endif %}
       <li class="breadcrumb-item"><a href="{{ url_for('trading.stock_page', symbol=stock.symbol) }}">{{stock.symbol}}</a></li>
-      <li class="breadcrumb-item active" aria-current="page">SMA</li>
+      <li class="breadcrumb-item active" aria-current="page">{{strategy}}</li>
     </ol>
   </nav>
 

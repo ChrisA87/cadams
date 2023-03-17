@@ -60,6 +60,8 @@ fonttools==4.33.3
     # via
     #   -c requirements/requirements.txt
     #   matplotlib
+freezegun==1.2.2
+    # via -r requirements/dev-requirements.in
 iniconfig==1.1.1
     # via pytest
 ipykernel==6.13.0
@@ -244,6 +246,7 @@ pytest==7.1.2
 python-dateutil==2.8.2
     # via
     #   -c requirements/requirements.txt
+    #   freezegun
     #   jupyter-client
     #   matplotlib
     #   pandas

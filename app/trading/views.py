@@ -76,7 +76,8 @@ def strategy_sma(symbol):
         sma=sma,
         returns=returns,
         sma_script=sma_script,
-        sma_div=sma_div)
+        sma_div=sma_div,
+        strategy='SMA')
 
 
 @trading.route('/stocks/<symbol>/momentum', methods=['GET', 'POST'])
@@ -105,7 +106,8 @@ def strategy_momentum(symbol):
         stock=stock,
         form=form,
         momentum=momentum,
-        returns=returns)
+        returns=returns,
+        strategy='Momentum')
 
 
 @trading.route('/stocks/<symbol>/mean-reversion', methods=['GET', 'POST'])
@@ -139,7 +141,8 @@ def strategy_mean_reversion(symbol):
         mean_rev=mean_rev,
         returns=returns,
         distance_script=distance_script,
-        distance_div=distance_div)
+        distance_div=distance_div,
+        strategy='Mean-Reversion')
 
 
 @trading.route('/stocks/<symbol>/ols', methods=['GET', 'POST'])
@@ -168,4 +171,5 @@ def strategy_ols(symbol):
         stock=stock,
         form=form,
         ols=ols,
-        returns=returns)
+        returns=returns,
+        strategy='OLS')

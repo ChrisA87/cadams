@@ -33,11 +33,10 @@ class Stock(db.Model):
                 db.session.commit()
 
     def update(self):
-        today = date.today()
-        if self.last_updated is None or self.last_updated.date() < today:
+        if self.last_updated is None or self.last_updated.date() < date.today():
             try:
                 StockPrice.update(self.symbol)
-                self.last_updated = today
+                self.last_updated = datetime.now()
                 db.session.add(self)
                 db.session.commit()
             except Exception:

@@ -30,7 +30,7 @@ def test_stock_update(monkeypatch, test_db):
     stock = Stock(symbol='CDMS', name='Cadams Stock')
     assert stock.last_updated is None
     stock.update()
-    assert stock.last_updated == datetime(2023, 1, 1)
+    assert stock.last_updated == datetime(2023, 1, 1, 13, 0)
 
 
 def test_stock_price_repr():

@@ -7,6 +7,12 @@ from app.models.roles import Role
 from app.models.stocks import Stock, StockPrice, starting_stocks
 
 
+@pytest.fixture
+def dummy_corpus():
+    yield ['cat', 'dog', 'bat', 'bad', 'eat', 'tan', 'ant', 'tea',
+           'seat', 'leaf', 'beat', 'deaf', 'half']
+
+
 @pytest.fixture(scope='module')
 def app():
     app = create_app('test')

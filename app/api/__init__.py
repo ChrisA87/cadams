@@ -19,5 +19,7 @@ api = Api(
     security='apikey')
 
 from .trading import api as namespace_trading
+from .wordle import api as namespace_wordle
 
 api.add_namespace(namespace_trading)
+api.add_namespace(namespace_wordle)

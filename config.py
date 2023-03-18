@@ -27,6 +27,7 @@ class DevConfig(Config):
 class TestConfig(Config):
     FLASK_ENV: str = 'test'
     TESTING: bool = True
+    PUBLIC_API_KEY: str = 'public-test-key'
     SQLALCHEMY_DATABASE_URI: str = 'sqlite://'
     WTF_CSRF_ENABLED = False
 

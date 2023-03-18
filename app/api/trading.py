@@ -11,7 +11,6 @@ api = Namespace(
 
 @api.route("/health")
 class HealthChecks(Resource):
-    @require_public_apikey
     def get(self):
         return {"status": "ok"}
 
@@ -19,7 +18,7 @@ class HealthChecks(Resource):
 @api.route("/stocks")
 @api.doc(security='apikey')
 class StocksList(Resource):
-    @require_apikey
+    @require_public_apikey
     def get(self):
         return [stock.to_dict('last_updated') for stock in Stock.query.all()]
 

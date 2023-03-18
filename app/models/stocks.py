@@ -4,6 +4,7 @@ import yfinance as yf
 from pandas import MultiIndex
 from sqlalchemy import func
 from .. import db
+from ..utils import to_json_safe
 
 
 starting_stocks = [
@@ -44,8 +45,8 @@ class Stock(db.Model):
                 pass
 
     def to_dict(self, *exclude_keys):
-        return {column.name: getattr(self, column.name) for column in self.__table__.columns
-                if column.name not in exclude_keys}
+        return {column.name: to_json_safe(getattr(self, column.name))
+                for column in self.__table__.columns}
 
     def __repr__(self):
         return f"<Stock[{self.id}]: {self.name} ({self.symbol})>"
@@ -132,3 +133,7 @@ class StockPrice(db.Model):
         new_data = StockPrice.get_price_data(symbol, start_date)
         stock_prices = StockPrice.process_price_data(new_data, symbol=symbol)
         StockPrice.insert_stock_prices(stock_prices)
+
+    def to_dict(self):
+        return {column.name: to_json_safe(getattr(self, column.name))
+                for column in self.__table__.columns}

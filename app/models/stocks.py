@@ -43,6 +43,10 @@ class Stock(db.Model):
                 # TODO - proper exception handling and logging here
                 pass
 
+    def to_dict(self, *exclude_keys):
+        return {column.name: getattr(self, column.name) for column in self.__table__.columns
+                if column.name not in exclude_keys}
+
     def __repr__(self):
         return f"<Stock[{self.id}]: {self.name} ({self.symbol})>"
 

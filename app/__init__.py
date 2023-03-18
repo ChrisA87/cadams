@@ -16,6 +16,7 @@ def create_app(config_name='default'):
     from .auth import auth
     from .main import main
     from .trading import trading
+    from .api import blueprint as api
     from .auth.admin import admin
 
     app = Flask(__name__)
@@ -34,5 +35,6 @@ def create_app(config_name='default'):
     app.register_blueprint(main)
     app.register_blueprint(auth)
     app.register_blueprint(trading)
+    app.register_blueprint(api)
 
     return app

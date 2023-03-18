@@ -1,11 +1,4 @@
-import pytest
 from app.wordle import wordle
-
-
-@pytest.fixture
-def dummy_corpus():
-    yield ['cat', 'dog', 'bat', 'bad', 'eat', 'tan', 'ant', 'tea',
-           'seat', 'leaf', 'beat', 'deaf', 'half']
 
 
 def test_filter_numeric():

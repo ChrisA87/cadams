@@ -37,6 +37,11 @@ def sample_stocks():
     return render_template('trading/stocks.html', stocks=stocks, sample=True)
 
 
+@trading.route('/trading-ideas')
+def trading_ideas():
+    return render_template('trading/trading_ideas.html')
+
+
 @trading.route('/stocks/<symbol>')
 def stock_page(symbol):
     stock = Stock.query.filter_by(symbol=symbol).first_or_404()

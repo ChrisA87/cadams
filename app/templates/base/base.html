@@ -24,9 +24,12 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{ url_for('main.index') }}">Home</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{{ url_for('main.about') }}">About</a>
+          </li>
           {% if current_user.is_authenticated and current_user.role_id == 3 %}
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{{ url_for('admin.index') }}">Admin</a>
+              <a class="nav-link" aria-current="page" href="{{ url_for('admin.index') }}">Admin</a>
             </li>
           {% endif %}
           <li class="nav-item dropdown">
@@ -35,6 +38,7 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><p class="dropdown-header">Algorithmic Trading</p></li>
+              <li><a class="dropdown-item" href="{{ url_for('trading.trading_ideas') }}">Trading Ideas</a></li>
               <li><a class="dropdown-item" href="{{ url_for('trading.sample_stocks') }}">Sample Stocks</a></li>
               {% if current_user.is_authenticated %}
               <li><a class="dropdown-item" href="{{ url_for('trading.stocks') }}">My Stocks</a></li>
@@ -46,6 +50,9 @@
           </li>
         </ul>
         <ul class="nav justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{{ url_for('api.doc') }}" target="_blank">API</a>
+          </li>
           <li class="nav-item">
             <a href="{{ url_for('auth.register') }}" class="nav-link">sign up</a>
           </li>

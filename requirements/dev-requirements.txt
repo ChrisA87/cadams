@@ -33,6 +33,10 @@ cffi==1.15.1
     # via
     #   -c requirements/requirements.txt
     #   argon2-cffi-bindings
+contourpy==1.0.7
+    # via
+    #   -c requirements/requirements.txt
+    #   matplotlib
 coverage==6.3.3
     # via -r requirements/dev-requirements.in
 cycler==0.11.0
@@ -134,7 +138,7 @@ markupsafe==2.1.1
     #   -c requirements/requirements.txt
     #   jinja2
     #   nbconvert
-matplotlib==3.5.2
+matplotlib==3.7.1
     # via
     #   -c requirements/requirements.txt
     #   seaborn
@@ -173,6 +177,7 @@ notebook==6.4.12
 numpy==1.22.3
     # via
     #   -c requirements/requirements.txt
+    #   contourpy
     #   matplotlib
     #   pandas
     #   scipy
@@ -197,7 +202,7 @@ pexpect==4.8.0
     # via ipython
 pickleshare==0.7.5
     # via ipython
-pillow==9.1.1
+pillow==9.4.0
     # via
     #   -c requirements/requirements.txt
     #   matplotlib

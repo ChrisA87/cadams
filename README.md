@@ -3,7 +3,7 @@
 Source code for [https://cadams.tech](https://cadams.tech)
 
 ## Initial Setup
-Create and activate a new python [virtualenv](https://pypi.org/project/virtualenv/), then to install dependencies and setup the database run:
+Create and activate a new python [virtualenv](https://pypi.org/project/virtualenv/) with python **3.10.0** interpreter, then to install dependencies and setup the database run:
 ```
 make pip
 make db-init

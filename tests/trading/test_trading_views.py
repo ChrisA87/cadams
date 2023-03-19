@@ -46,7 +46,7 @@ def test_valid_post_sma_strategy_returns_200(client, test_db):
     response = client.post('/stocks/CADM/simple-moving-average',
                            data={'fast': 15,
                                  'slow': 100,
-                                 'duration': '10Y'},
+                                 'duration': '10'},
                            follow_redirects=True)
     assert response.status_code == 200
     assert b'Simple Moving Average Strategy For CADM' in response.data
@@ -56,7 +56,7 @@ def test_invalid_post_sma_strategy_flashes_message(client, test_db):
     response = client.post('/stocks/CADM/simple-moving-average',
                            data={'fast': 100,
                                  'slow': 10,
-                                 'duration': '10Y'},
+                                 'duration': '10'},
                            follow_redirects=True)
     assert response.status_code == 200
     assert b'invalid input' in response.data
@@ -73,7 +73,7 @@ def test_valid_get_momentum_strategy_returns_200(client, test_db):
 def test_valid_post_momentum_strategy_returns_200(client, test_db):
     response = client.post('/stocks/CADM/momentum',
                            data={'period': 5,
-                                 'duration': '10Y'},
+                                 'duration': '10'},
                            follow_redirects=True)
     assert response.status_code == 200
     assert b'Momentum Strategy For CADM' in response.data
@@ -91,7 +91,24 @@ def test_valid_post_mean_reversion_strategy_returns_200(client, test_db):
     response = client.post('/stocks/CADM/mean-reversion',
                            data={'sma': 15,
                                  'threshold': 7.5,
-                                 'duration': '10Y'},
+                                 'duration': '10'},
                            follow_redirects=True)
     assert response.status_code == 200
     assert b'Mean Reversion Strategy For CADM' in response.data
+
+
+##################################################################################
+# OLS
+def test_valid_get_ols_strategy_returns_200(client, test_db):
+    response = client.get('/stocks/CADM/ols')
+    assert response.status_code == 200
+    assert b"Ordinary Least Squares (OLS) Strategy For CADM" in response.data
+
+
+def test_valid_post_ols_strategy_returns_200(client, test_db):
+    response = client.post('/stocks/CADM/ols',
+                           data={'lags': 15,
+                                 'duration': 10},
+                           follow_redirects=True)
+    assert response.status_code == 200
+    assert b'Ordinary Least Squares (OLS) Strategy For CADM' in response.data

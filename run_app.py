@@ -5,7 +5,7 @@ from app.models.roles import Role
 from app.models.stocks import Stock, StockPrice
 from flask_migrate import Migrate
 
-config_name = os.environ.get('FLASK_ENV') or 'default'
+config_name = os.environ.get('FLASK_ENV', 'default')
 app = create_app(config_name)
 migrate = Migrate(app, db)
 

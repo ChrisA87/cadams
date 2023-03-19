@@ -1,5 +1,3 @@
-from app.models.users import User
-
 
 def test_get_login_returns_200(client):
     response = client.get('/auth/login')
@@ -52,12 +50,6 @@ def test_logout_when_not_logged_in(client, test_db):
     assert b'Please log in to access this page' in response.data
 
 
-def test_post_login_returns_200__valid(client, test_db):
-    response = client.post('/auth/login', data={'username': 'John', 'password': 'cat'}, follow_redirects=True)
-    assert response.status_code == 200
-    assert b'Welcome Back John' in response.data
-
-
 def test_post_login_returns_200__invalid(client, test_db):
     response = client.post('/auth/login', data={'username': 'John', 'password': 'wrong-password'}, follow_redirects=True)
     print(response.data.decode('utf-8'))
@@ -73,43 +65,76 @@ def test_logout_when_logged_in(client, test_db):
     assert b'You have been logged out' in response.data
 
 
-def test_user_confirm_token__valid(client, test_db):
-    # Register new user
-    new_user = User(username='steve', password='password1', email='steve@test.com')
-    client.post('/auth/register',
-                data={'username': new_user.username,
-                      'email': new_user.email,
-                      'password': 'password1',
-                      'password2': 'password1'},
-                follow_redirects=True)
+def test_user_verify__unconfrimed_invalid_token(client, list_users, test_db):
+    user, *_ = list_users
 
     # Login
-    client.post('/auth/login', data={'username': new_user.username, 'password': 'password1'},
+    client.post('/auth/login', data={'username': user.username, 'password': 'cat'},
                 follow_redirects=False)
 
     # Verify account
-    token = new_user.generate_verify_token()
-    response = client.get(f'auth/verify/{token}', follow_redirects=True)
+    response = client.get('auth/verify/not-the-right-token', follow_redirects=True)
     assert response.status_code == 200
+    assert b'The confirmation link is invalid or has expired.' in response.data
 
 
-def test_user_confirm_token__invalid(client, test_db):
-    # Register new user
-    new_user = User(username='Billy', password='bar', email='billy@test.com')
-    client.post('/auth/register',
-                data={'username': new_user.username,
-                      'email': new_user.email,
-                      'password': 'bar',
-                      'password2': 'bar'},
-                follow_redirects=True)
+def test_user_verify__unconfirmed_valid(client, list_users, test_db):
+    user, *_ = list_users
 
     # Login
-    client.post('/auth/login', data={'username': new_user.username, 'password': 'bar'},
+    client.post('/auth/login', data={'username': user.username, 'password': 'cat'},
                 follow_redirects=False)
 
     # Verify account
-    existing_user = User.query.first()
-    token = existing_user.generate_verify_token()
+    token = user.generate_verify_token()
     response = client.get(f'auth/verify/{token}', follow_redirects=True)
     assert response.status_code == 200
-    assert b'The confirmation link is invalid' in response.data
+    assert b'You have confimed your account. Thanks!' in response.data
+
+
+def test_user_verify__confirmed_returns_200(client, list_users, test_db):
+    *_, confirmed_user = list_users
+
+    # Login
+    client.post('/auth/login', data={'username': confirmed_user.username, 'password': 'rabbit'},
+                follow_redirects=False)
+
+    # Verify account
+    token = confirmed_user.generate_verify_token()
+    response = client.get(f'auth/verify/{token}', follow_redirects=True)
+    assert response.status_code == 200
+    client.get('/auth/logout', follow_redirects=True)
+
+
+def test_admin_page__not_logged_in_redirected_to_login(client, test_db):
+    response = client.get('/auth/admin', follow_redirects=True)
+    assert response.status_code == 200
+    assert b'Log In' in response.data
+    assert b'Username' in response.data
+    assert b'Password' in response.data
+
+
+def test_admin_page__logged_in_but_not_admin_redirected_to_login(client, test_db, list_users):
+    non_admin, *_ = list_users
+    client.post('/auth/login', data={'username': non_admin.username, 'password': 'cat'},
+                follow_redirects=True)
+    response = client.get('/auth/admin', follow_redirects=True)
+    assert response.status_code == 200
+    assert b'Log In' in response.data
+    assert b'Username' in response.data
+    assert b'Password' in response.data
+
+
+def test_admin_page__logged_in_admin_user_gets_admin_panel(client, test_db, list_users):
+    *_, admin_user = list_users
+    client.post('/auth/login', data={'username': admin_user.username, 'password': 'rabbit'},
+                follow_redirects=True)
+
+    response = client.get('/auth/admin', follow_redirects=True)
+    assert response.status_code == 200
+    assert b'Home - Admin' in response.data
+
+    response = client.get('/auth/admin/user', follow_redirects=True)
+    assert response.status_code == 200
+    for user in list_users:
+        assert user.email.encode() in response.data

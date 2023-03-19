@@ -5,3 +5,4 @@ jupyter
 pylint
 pytest
 seaborn
+freezegun

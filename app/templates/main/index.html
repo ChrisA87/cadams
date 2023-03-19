@@ -1,0 +1,77 @@
+{% extends "base/base.html" %}
+
+{% block title %}Cadams - Index{% endblock %}
+
+{% block content %}
+{{ super() }}
+<main class="container">
+    <div class="p-4 p-md-5 mb-4 rounded text-bg-dark">
+        <h1 class="display-2 fst-italic">
+            {% if current_user.is_authenticated %}
+            Welcome Back {{ current_user.username }}
+            {% else %}
+            Trading Ideas
+            {% endif %}
+        </h1>
+    </div>
+    <div class="row mb-2">
+        <div class="col-md-6">
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-primary">Simple Moving Averages</strong>
+                <h3 class="mb-0">EUR=</h3>
+                    <!-- <div class="mb-1 text-muted">Nov 12</div> -->
+                <p class="card-text mb-auto">
+                    Over the past 10 years, trading the Euro using a simple moving average strategy (with a fast MA of 42 and slow MA of 252) has worked well.
+                </p>
+                <a href="{{ url_for('trading.strategy_sma', symbol='EURUSD=X') }}" class="stretched-link">See more</a>
+            </div>
+            <!--<div class="col-auto d-none d-lg-block">
+            <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+            </div>-->
+        </div>
+        </div>
+        <div class="col-md-6">
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-primary">Momentum</strong>
+            <h3 class="mb-0">Gold</h3>
+            <p class="mb-auto">
+                Over the past 10 years, trading gold using a momentum strategy (using a period of 3 rolling days) has worked well.
+            </p>
+            <a href="{{ url_for('trading.strategy_momentum', symbol='GLD') }}" class="stretched-link">See more</a>
+        </div>
+        </div>
+        
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <div class="col-md-6">
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-primary">Mean Reversion</strong>
+                <h3 class="mb-0">GDX</h3>
+                <p class="card-text mb-auto">Trading the VanEck Gold Miners ETF (GDX) using a mean reversion stratedy (with SMA of 28 days and threshold of $3.00 from the mean) has worked well.</p>
+                <a href="{{ url_for('trading.strategy_mean_reversion', symbol='GDX') }}" class="stretched-link">See more</a>
+            </div>
+        </div>
+        </div>
+        <div class="col-md-6">
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-primary">Ordinary Least Squares</strong>
+            <h3 class="mb-0">EUR=</h3>
+            <p class="mb-auto">
+                Over the past 10 years, trading the Euro using an Ordinary Least Squares (OLS) strategy (using 7 lagged days) has also performed well.
+            </p>
+            <a href="{{ url_for('trading.strategy_ols', symbol='EURUSD=X') }}" class="stretched-link">See more</a>
+        </div>
+        </div>
+        
+        </div>
+    </div>
+
+
+</main>
+{% endblock %}

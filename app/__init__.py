@@ -1,8 +1,10 @@
 from flask import Flask
+from flask_admin import Admin
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_debugtoolbar import DebugToolbarExtension
 from config import config
+
 
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -11,6 +13,11 @@ toolbar = DebugToolbarExtension()
 
 
 def create_app(config_name='default'):
+    from .auth import auth
+    from .main import main
+    from .trading import trading
+    from .api import blueprint as api
+    from .auth.admin import admin
 
     app = Flask(__name__)
 
@@ -22,13 +29,12 @@ def create_app(config_name='default'):
     db.init_app(app)
     login_manager.init_app(app)
     toolbar.init_app(app)
+    admin.init_app(app)
 
     # Register Blueprints
-    from .main import main
     app.register_blueprint(main)
-    from .auth import auth
     app.register_blueprint(auth)
-    from .trading import trading
     app.register_blueprint(trading)
+    app.register_blueprint(api)
 
     return app

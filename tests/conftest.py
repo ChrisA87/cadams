@@ -31,9 +31,9 @@ def client(app):
 @pytest.fixture(scope='module')
 def list_users():
     yield [
-        User(username='John', email='john@example.com', password='cat', id=1, role_id=1),
-        User(username='Susan', email='susan@example.com', password='dog', id=2, role_id=2),
-        User(username='Bob', email='bob@example.com', password='rabbit', id=3, role_id=3,
+        User(username='john', email='john@example.com', password='cat', id=1, role_id=1),
+        User(username='susan', email='susan@example.com', password='dog', id=2, role_id=2),
+        User(username='bob', email='bob@example.com', password='rabbit', id=3, role_id=3,
              api_key='api-key123', confirmed=True)
     ]
 

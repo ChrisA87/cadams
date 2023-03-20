@@ -53,4 +53,4 @@ def test_confirm_exception(app, list_users):
 
 def test_user_repr(app, list_users):
     u1, *_ = list_users
-    assert u1.__repr__() == '<User John (1)>'
+    assert u1.__repr__() == '<User john (1)>'

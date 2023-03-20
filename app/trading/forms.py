@@ -14,8 +14,8 @@ class ParamsSMA(ParamsBase):
     fast = IntegerField('Fast Moving Average', default=42, validators=[DataRequired()])
     slow = IntegerField('Slow Moving Average', default=252, validators=[DataRequired()])
 
-    def validate(self):
-        super().validate()
+    def validate(self, extra_validators=None):
+        super().validate(extra_validators=extra_validators)
         if self.fast.data >= self.slow.data:
             self.fast.errors.append('Fast moving average must be smaller than slow moving average')
             return False

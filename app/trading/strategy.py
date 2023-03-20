@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 from bokeh.plotting import figure, ColumnDataSource
 from bokeh.models import DatetimeTickFormatter, NumeralTickFormatter, Span
 from bokeh.embed import components
-from ..models.errors import NotFittedError
+from .errors import NotFittedError
 
 
 class Strategy:

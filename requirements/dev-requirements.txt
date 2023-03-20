@@ -247,7 +247,7 @@ pyrsistent==0.19.3
     # via
     #   -c requirements.txt
     #   jsonschema
-pytest==7.1.2
+pytest==7.2.2
     # via -r dev-requirements.in
 python-dateutil==2.8.2
     # via
@@ -289,8 +289,6 @@ terminado==0.15.0
     # via notebook
 tinycss2==1.1.1
     # via nbconvert
-tomli==2.0.1
-    # via pytest
 tomlkit==0.11.4
     # via pylint
 tornado==6.1

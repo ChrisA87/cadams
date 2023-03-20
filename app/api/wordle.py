@@ -11,10 +11,13 @@ api = Namespace(
 
 wordle_suggestion_params = api.model('WordleSuggestions', {
     'pattern': fields.String(
+        example='___th',
         description='Known-position letters pattern. Use underscores for unknown letters. e.g. "___th"'),
     'include_letters': fields.String(
+        example='oa',
         description='Letters known to exist in the word, but positions are unknown.'),
     'exclude_letters': fields.String(
+        example='sne',
         description='Letters known not to exist in the word.')})
 
 

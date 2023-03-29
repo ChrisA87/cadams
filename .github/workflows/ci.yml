@@ -10,18 +10,12 @@ on:
     # The branches below must be a subset of the branches above
     branches: [ master ]
   workflow_dispatch:
-    inputs:
-      manual:
-        description: 'Manually run the workflow'
-        required: true
-        default: true
-        type: boolean
+
 permissions:
   contents: read
 
 jobs:
   test:
-    if: ${{ inputs.manual }}
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v3

@@ -22,7 +22,7 @@ jobs:
 
     - name: temp debug step - delete
       run: |
-        echo ${{ github.event }}
+        echo ${{ github.event.type }}
         echo ${{ github.event.workflow_dispatch }}
 
     - name: Set up Python 3.10

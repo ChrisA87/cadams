@@ -33,7 +33,7 @@ contourpy==1.0.7
     # via
     #   -c requirements.txt
     #   matplotlib
-coverage==6.3.3
+coverage==7.2.2
     # via -r dev-requirements.in
 cycler==0.11.0
     # via

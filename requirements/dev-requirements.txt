@@ -186,7 +186,7 @@ packaging==21.3
     #   nbconvert
     #   pytest
     #   qtpy
-pandas==1.4.2
+pandas==2.0.0
     # via
     #   -c requirements.txt
     #   seaborn
@@ -309,6 +309,10 @@ traitlets==5.2.1.post0
     #   nbformat
     #   notebook
     #   qtconsole
+tzdata==2023.3
+    # via
+    #   -c requirements.txt
+    #   pandas
 wcwidth==0.2.5
     # via prompt-toolkit
 webencodings==0.5.1

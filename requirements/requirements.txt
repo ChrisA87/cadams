@@ -118,7 +118,7 @@ multitasking==0.0.11
     # via yfinance
 nltk==3.8.1
     # via -r requirements.in
-numpy==1.22.3
+numpy==1.24.2
     # via
     #   -r requirements.in
     #   bokeh
@@ -213,7 +213,7 @@ wtforms==3.0.1
     #   flask-wtf
 xyzservices==2023.2.0
     # via bokeh
-yfinance==0.2.12
+yfinance==0.2.16
     # via -r requirements.in
 
 # The following packages are considered to be unsafe in a requirements file:

@@ -20,4 +20,4 @@ pydantic~=1.9.0
 pymysql~=1.0.3
 sendgrid~=6.9.7
 werkzeug~=2.2.3
-yfinance~=0.2.12
+yfinance~=0.2.16

@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta, date
 import pandas_datareader as pdr
 import yfinance as yf
+import pandas as pd
 from pandas import MultiIndex
 from sqlalchemy import func
 from .. import db
@@ -15,6 +16,19 @@ starting_stocks = [
     ('GDX', 'VanEck Gold Miners ETF'),
     ('GLD', 'SPDR Gold Trust'),
 ]
+
+
+def get_stock_and_price_data(symbol, duration=None):
+    duration = 10 if duration is None else int(duration)
+    stock = Stock.query.filter_by(symbol=symbol).first_or_404()
+    start_date = datetime.today() - pd.Timedelta(days=365 * duration)
+    base_query = (StockPrice.query
+                  .with_entities(StockPrice.date,
+                                 StockPrice.adj_close)
+                  .filter_by(symbol=symbol)
+                  .filter(StockPrice.date >= start_date))
+    prices = pd.read_sql(base_query.statement, base_query.session.bind)
+    return stock, prices
 
 
 class Stock(db.Model):

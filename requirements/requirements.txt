@@ -130,7 +130,7 @@ packaging==21.3
     # via
     #   bokeh
     #   matplotlib
-pandas==1.4.2
+pandas==2.0.0
     # via
     #   -r requirements.in
     #   bokeh
@@ -196,6 +196,8 @@ typing-extensions==4.2.0
     # via
     #   alembic
     #   pydantic
+tzdata==2023.3
+    # via pandas
 urllib3==1.26.9
     # via requests
 webencodings==0.5.1

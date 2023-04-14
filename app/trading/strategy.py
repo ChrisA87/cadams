@@ -47,11 +47,19 @@ class Strategy:
         self.df['strategy'] = self.df['returns'] * self.df['position'].shift()
         self._dropna()
 
+    def _set_position_term(self):
+        self.df['position_term'] = (
+            self.df.position
+            .where(self.df.position.ne(self.df.position.shift()))
+            .map({self.short_pos: 'sell', 1: 'buy'})
+            .fillna('hold'))
+
     def fit(self, **kwargs):
         for kw, val in kwargs.items():
             setattr(self, kw, val)
         self._set_returns(self.metric)
         self._set_position()
+        self._set_position_term()
         self._set_strategy()
         self._fit = True
 

@@ -1,25 +1,10 @@
-from datetime import datetime
-import pandas as pd
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_required
 
-from app.trading.strategy import OLS, MeanReversion, Momentum
-from . import trading, SMA
+from app.trading.strategy import SMA, OLS, MeanReversion, Momentum
+from app.models.stocks import Stock, starting_stocks, get_stock_and_price_data
+from . import trading
 from .forms import ParamsOLS, ParamsSMA, ParamsMomentum, ParamsMeanReversion
-from ..models.stocks import Stock, StockPrice, starting_stocks
-
-
-def get_stock_and_price_data(symbol, duration=None):
-    duration = 10 if duration is None else int(duration)
-    stock = Stock.query.filter_by(symbol=symbol).first_or_404()
-    start_date = datetime.today() - pd.Timedelta(days=365 * duration)
-    base_query = (StockPrice.query
-                  .with_entities(StockPrice.date,
-                                 StockPrice.adj_close)
-                  .filter_by(symbol=symbol)
-                  .filter(StockPrice.date >= start_date))
-    prices = pd.read_sql(base_query.statement, base_query.session.bind)
-    return stock, prices
 
 
 @trading.route('/stocks')

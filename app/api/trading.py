@@ -1,6 +1,9 @@
+import datetime
 from flask_restx import Namespace, Resource
+from app.models.stocks import Stock, StockPrice, get_stock_and_price_data
+from app.trading.strategy import SMA
 from .security import require_apikey, require_public_apikey, format_response
-from ..models.stocks import Stock, StockPrice
+from .models.trading import sma_params
 
 
 api = Namespace(
@@ -46,3 +49,29 @@ class StockPrices(Resource):
         if stock_prices:
             return [price.to_dict() for price in stock_prices]
         return {'symbol': symbol, 'result': 'not found'}
+
+
+@api.route("/strategy/sma/<symbol>")
+@api.route("/strategy/sma/<symbol>/<date>")
+@api.doc(security='apikey')
+class SMAStrategySuggestion(Resource):
+    @format_response
+    @require_public_apikey
+    @api.expect(sma_params, validate=True)
+    def post(self, symbol: str, date: datetime.date = None):
+        stock, prices = get_stock_and_price_data(symbol)
+        strategy = SMA(prices)
+        strategy.fit(**api.payload)
+        if date is None:
+            suggestion = strategy.df.position_term.tail(1).values[0]
+            position = strategy.df.position.tail(1).values[0]
+            date = datetime.date.today().isoformat()
+        else:
+            suggestion = strategy.df.loc[date, 'position_term'].values[0]
+            position = strategy.df.loc[date, 'position'].values[0]
+        return {
+            'strategy': 'SMA',
+            'symbol': stock.symbol,
+            'date': date,
+            'suggestion': suggestion,
+            'position': {strategy.short_pos: 'short', 1: 'long'}.get(position)}

@@ -1,3 +1,5 @@
+import pytest
+
 
 def test_api_docs__returns_200(client):
     response = client.get('/api/v1', follow_redirects=True)
@@ -82,3 +84,19 @@ def test_stockprice_symbol__not_found_returns_200(client, test_db):
 
     assert response.status_code == 200
     assert response.json['result'] == {'result': 'not found', 'symbol': 'FAKEY'}
+
+
+@pytest.mark.parametrize('strategy, payload', [
+    ('sma', {'fast': 42, 'slow': 252}),
+    ('momentum', {'period': 3}),
+    ('mean-reversion', {'sma': 28, 'threshold': 3}),
+    ('ols', {'lags': 7})
+])
+def test_strategy_suggestion__returns_200(client, test_db, list_users, strategy, payload):
+    # Logged in admin user
+    *_, admin_user = list_users
+    client.post('/auth/login', data={'username': admin_user.username, 'password': 'rabbit'},
+                follow_redirects=True)
+
+    response = client.post(f'api/v1/trading/strategy/{strategy}/CADM', json=payload)
+    assert response.status_code == 200

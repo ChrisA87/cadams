@@ -202,7 +202,7 @@ urllib3==1.26.9
     # via requests
 webencodings==0.5.1
     # via html5lib
-werkzeug==2.2.3
+werkzeug==2.3.4
     # via
     #   -r requirements.in
     #   flask

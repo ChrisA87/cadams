@@ -14,8 +14,9 @@ attrs==22.2.0
     # via jsonschema
 beautifulsoup4==4.11.2
     # via yfinance
-blinker==1.4
+blinker==1.6.2
     # via
+    #   flask
     #   flask-debugtoolbar
     #   flask-mail
 bokeh==3.1.0
@@ -42,7 +43,7 @@ dnspython==2.2.1
     # via email-validator
 email-validator==2.0.0.post2
     # via -r requirements.in
-flask==2.2.5
+flask==2.3.2
     # via
     #   -r requirements.in
     #   flask-admin

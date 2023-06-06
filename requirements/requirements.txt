@@ -35,7 +35,7 @@ contourpy==1.0.7
     # via
     #   bokeh
     #   matplotlib
-cryptography==39.0.1
+cryptography==41.0.0
     # via yfinance
 cycler==0.11.0
     # via matplotlib

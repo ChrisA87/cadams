@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . /app
 
-RUN pip install -r requirements/requirements.txt
+RUN pip install -r requirements/requirements.txt --no-cache-dir
 
 RUN python -m nltk.downloader brown
 

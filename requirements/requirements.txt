@@ -146,7 +146,7 @@ pillow==9.5.0
     #   matplotlib
 pycparser==2.21
     # via cffi
-pydantic==1.10.8
+pydantic==1.10.9
     # via -r requirements.in
 pymysql==1.0.3
     # via -r requirements.in

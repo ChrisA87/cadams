@@ -119,7 +119,7 @@ multitasking==0.0.11
     # via yfinance
 nltk==3.8.1
     # via -r requirements.in
-numpy==1.24.3
+numpy==1.25.0
     # via
     #   -r requirements.in
     #   bokeh

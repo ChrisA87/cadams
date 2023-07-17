@@ -25,9 +25,7 @@ beautifulsoup4==4.11.2
 bleach==5.0.0
     # via nbconvert
 cffi==1.15.1
-    # via
-    #   -c requirements.txt
-    #   argon2-cffi-bindings
+    # via argon2-cffi-bindings
 contourpy==1.0.7
     # via
     #   -c requirements.txt
@@ -185,7 +183,7 @@ packaging==21.3
     #   nbconvert
     #   pytest
     #   qtpy
-pandas==2.0.2
+pandas==2.0.3
     # via
     #   -c requirements.txt
     #   seaborn
@@ -222,9 +220,7 @@ pure-eval==0.2.2
 pycodestyle==2.10.0
     # via flake8
 pycparser==2.21
-    # via
-    #   -c requirements.txt
-    #   cffi
+    # via cffi
 pyflakes==3.0.1
     # via flake8
 pygments==2.12.0

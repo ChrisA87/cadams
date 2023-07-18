@@ -132,7 +132,7 @@ markupsafe==2.1.1
     #   -c requirements.txt
     #   jinja2
     #   nbconvert
-matplotlib==3.7.1
+matplotlib==3.7.2
     # via
     #   -c requirements.txt
     #   seaborn

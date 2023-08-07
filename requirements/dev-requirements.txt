@@ -52,7 +52,7 @@ executing==0.8.3
     # via stack-data
 fastjsonschema==2.15.3
     # via nbformat
-flake8==6.0.0
+flake8==6.1.0
     # via -r dev-requirements.in
 fonttools==4.33.3
     # via
@@ -217,11 +217,11 @@ ptyprocess==0.7.0
     #   terminado
 pure-eval==0.2.2
     # via stack-data
-pycodestyle==2.10.0
+pycodestyle==2.11.0
     # via flake8
 pycparser==2.21
     # via cffi
-pyflakes==3.0.1
+pyflakes==3.1.0
     # via flake8
 pygments==2.15.0
     # via

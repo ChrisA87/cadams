@@ -21,7 +21,7 @@ blinker==1.6.2
     #   flask
     #   flask-debugtoolbar
     #   flask-mail
-bokeh==3.2.0
+bokeh==3.2.2
     # via -r requirements.in
 certifi==2023.7.22
     # via requests
@@ -129,7 +129,7 @@ packaging==21.3
     # via
     #   bokeh
     #   matplotlib
-pandas==2.0.3
+pandas==2.1.0
     # via
     #   -r requirements.in
     #   bokeh

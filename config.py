@@ -1,5 +1,5 @@
 from os.path import dirname, abspath
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings
 
 basedir = abspath(dirname(__file__))
 
@@ -29,7 +29,7 @@ class TestConfig(Config):
     TESTING: bool = True
     PUBLIC_API_KEY: str = 'public-test-key'
     SQLALCHEMY_DATABASE_URI: str = 'sqlite://'
-    WTF_CSRF_ENABLED = False
+    WTF_CSRF_ENABLED: bool = False
 
 
 class ProdConfig(Config):

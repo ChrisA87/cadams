@@ -8,6 +8,8 @@ alembic==1.10.2
     # via flask-migrate
 aniso8601==9.0.1
     # via flask-restx
+annotated-types==0.5.0
+    # via pydantic
 appdirs==1.4.4
     # via yfinance
 attrs==22.2.0
@@ -20,7 +22,7 @@ blinker==1.6.2
     #   flask-debugtoolbar
     #   flask-mail
 bokeh==3.2.2
-    # via -r requirements.in
+    # via -r requirements/requirements.in
 certifi==2023.7.22
     # via requests
 charset-normalizer==2.0.12
@@ -38,10 +40,10 @@ cycler==0.11.0
 dnspython==2.2.1
     # via email-validator
 email-validator==2.0.0.post2
-    # via -r requirements.in
+    # via -r requirements/requirements.in
 flask==2.3.3
     # via
-    #   -r requirements.in
+    #   -r requirements/requirements.in
     #   flask-admin
     #   flask-debugtoolbar
     #   flask-login
@@ -51,31 +53,29 @@ flask==2.3.3
     #   flask-sqlalchemy
     #   flask-wtf
 flask-admin==1.6.1
-    # via -r requirements.in
+    # via -r requirements/requirements.in
 flask-debugtoolbar==0.13.1
-    # via -r requirements.in
+    # via -r requirements/requirements.in
 flask-login==0.6.2
-    # via -r requirements.in
+    # via -r requirements/requirements.in
 flask-mail==0.9.1
-    # via -r requirements.in
+    # via -r requirements/requirements.in
 flask-migrate==4.0.4
-    # via -r requirements.in
+    # via -r requirements/requirements.in
 flask-restx==1.1.0
-    # via -r requirements.in
+    # via -r requirements/requirements.in
 flask-sqlalchemy==2.5.1
     # via
-    #   -r requirements.in
+    #   -r requirements/requirements.in
     #   flask-migrate
 flask-wtf==1.1.1
-    # via -r requirements.in
+    # via -r requirements/requirements.in
 fonttools==4.33.3
     # via matplotlib
 frozendict==2.3.5
     # via yfinance
-greenlet==2.0.2
-    # via sqlalchemy
 gunicorn==20.1.0
-    # via -r requirements.in
+    # via -r requirements/requirements.in
 html5lib==1.1
     # via yfinance
 idna==3.3
@@ -110,14 +110,14 @@ markupsafe==2.1.1
     #   werkzeug
     #   wtforms
 matplotlib==3.7.2
-    # via -r requirements.in
+    # via -r requirements/requirements.in
 multitasking==0.0.11
     # via yfinance
 nltk==3.8.1
-    # via -r requirements.in
+    # via -r requirements/requirements.in
 numpy==1.25.2
     # via
-    #   -r requirements.in
+    #   -r requirements/requirements.in
     #   bokeh
     #   contourpy
     #   matplotlib
@@ -129,21 +129,27 @@ packaging==21.3
     #   matplotlib
 pandas==2.1.0
     # via
-    #   -r requirements.in
+    #   -r requirements/requirements.in
     #   bokeh
     #   pandas-datareader
     #   yfinance
 pandas-datareader==0.10.0
-    # via -r requirements.in
+    # via -r requirements/requirements.in
 pillow==10.0.0
     # via
-    #   -r requirements.in
+    #   -r requirements/requirements.in
     #   bokeh
     #   matplotlib
-pydantic==1.10.9
-    # via -r requirements.in
+pydantic==2.3.0
+    # via
+    #   -r requirements/requirements.in
+    #   pydantic-settings
+pydantic-core==2.6.3
+    # via pydantic
+pydantic-settings==2.0.3
+    # via -r requirements/requirements.in
 pymysql==1.1.0
-    # via -r requirements.in
+    # via -r requirements/requirements.in
 pyparsing==3.0.9
     # via
     #   matplotlib
@@ -154,6 +160,8 @@ python-dateutil==2.8.2
     # via
     #   matplotlib
     #   pandas
+python-dotenv==1.0.0
+    # via pydantic-settings
 python-http-client==3.3.7
     # via sendgrid
 pytz==2022.7.1
@@ -170,7 +178,7 @@ requests==2.31.0
     #   pandas-datareader
     #   yfinance
 sendgrid==6.10.0
-    # via -r requirements.in
+    # via -r requirements/requirements.in
 six==1.16.0
     # via
     #   html5lib
@@ -187,10 +195,11 @@ tornado==6.1
     # via bokeh
 tqdm==4.65.0
     # via nltk
-typing-extensions==4.2.0
+typing-extensions==4.7.1
     # via
     #   alembic
     #   pydantic
+    #   pydantic-core
 tzdata==2023.3
     # via pandas
 urllib3==1.26.9
@@ -199,7 +208,7 @@ webencodings==0.5.1
     # via html5lib
 werkzeug==2.3.7
     # via
-    #   -r requirements.in
+    #   -r requirements/requirements.in
     #   flask
     #   flask-debugtoolbar
     #   flask-login
@@ -211,7 +220,7 @@ wtforms==3.0.1
 xyzservices==2023.2.0
     # via bokeh
 yfinance==0.2.26
-    # via -r requirements.in
+    # via -r requirements/requirements.in
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools

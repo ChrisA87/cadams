@@ -76,7 +76,7 @@ frozendict==2.3.5
     # via yfinance
 greenlet==2.0.2
     # via sqlalchemy
-gunicorn==20.1.0
+gunicorn==21.2.0
     # via -r requirements.in
 html5lib==1.1
     # via yfinance
@@ -128,6 +128,7 @@ numpy==1.26.0
 packaging==21.3
     # via
     #   bokeh
+    #   gunicorn
     #   matplotlib
 pandas==2.1.0
     # via
@@ -223,6 +224,3 @@ xyzservices==2023.2.0
     # via bokeh
 yfinance==0.2.26
     # via -r requirements.in
-
-# The following packages are considered to be unsafe in a requirements file:
-# setuptools

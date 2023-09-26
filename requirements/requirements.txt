@@ -138,6 +138,8 @@ pandas==2.1.0
     #   yfinance
 pandas-datareader==0.10.0
     # via -r requirements.in
+peewee==3.16.3
+    # via yfinance
 pillow==10.0.1
     # via
     #   -r requirements.in
@@ -222,5 +224,5 @@ wtforms==3.0.1
     #   flask-wtf
 xyzservices==2023.2.0
     # via bokeh
-yfinance==0.2.26
+yfinance==0.2.30
     # via -r requirements.in

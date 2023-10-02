@@ -64,7 +64,7 @@ flask-migrate==4.0.4
     # via -r requirements.in
 flask-restx==1.1.0
     # via -r requirements.in
-flask-sqlalchemy==2.5.1
+flask-sqlalchemy==3.1.1
     # via
     #   -r requirements.in
     #   flask-migrate
@@ -190,7 +190,7 @@ six==1.16.0
     #   python-dateutil
 soupsieve==2.4
     # via beautifulsoup4
-sqlalchemy==1.4.36
+sqlalchemy==2.0.21
     # via
     #   alembic
     #   flask-sqlalchemy
@@ -205,6 +205,7 @@ typing-extensions==4.7.1
     #   alembic
     #   pydantic
     #   pydantic-core
+    #   sqlalchemy
 tzdata==2023.3
     # via pandas
 urllib3==1.26.9

@@ -68,7 +68,7 @@ flask-sqlalchemy==2.5.1
     # via
     #   -r requirements.in
     #   flask-migrate
-flask-wtf==1.1.1
+flask-wtf==1.2.1
     # via -r requirements.in
 fonttools==4.33.3
     # via matplotlib

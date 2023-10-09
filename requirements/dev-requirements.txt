@@ -181,7 +181,7 @@ packaging==21.3
     #   nbconvert
     #   pytest
     #   qtpy
-pandas==2.1.0
+pandas==2.1.1
     # via
     #   -c requirements.txt
     #   seaborn

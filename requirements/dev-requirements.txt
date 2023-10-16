@@ -69,7 +69,7 @@ ipykernel==6.13.0
     #   jupyter-console
     #   notebook
     #   qtconsole
-ipython==8.14.0
+ipython==8.16.1
     # via
     #   -r dev-requirements.in
     #   ipykernel

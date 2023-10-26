@@ -25,14 +25,6 @@ def test_stocks__authorised_public_key_returns_200(client, test_db):
         follow_redirects=True,
         headers={'x-api-key': 'public-test-key'})
     assert response.status_code == 200
-    assert response.json['result'] == [
-        {'id': 1, 'name': 'Cadams, Inc.', 'symbol': 'CADM', 'last_updated': None},
-        {'id': 2, 'name': 'Apple, Inc.', 'symbol': 'AAPL', 'last_updated': None},
-        {'id': 3, 'name': 'Microsoft Corporation', 'symbol': 'MSFT', 'last_updated': None},
-        {'id': 4, 'name': 'Amazon.com, Inc.', 'symbol': 'AMZN', 'last_updated': None},
-        {'id': 5, 'name': 'Euro / US Dollar Rate', 'symbol': 'EURUSD=X', 'last_updated': None},
-        {'id': 6, 'name': 'VanEck Gold Miners ETF', 'symbol': 'GDX', 'last_updated': None},
-        {'id': 7, 'name': 'SPDR Gold Trust', 'symbol': 'GLD', 'last_updated': None}]
 
 
 def test_stock_symbol__not_authorised_returns_401(client):

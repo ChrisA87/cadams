@@ -2,7 +2,7 @@ from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_required
 
 from app.trading.strategy import SMA, OLS, MeanReversion, Momentum
-from app.models.stocks import Stock, starting_stocks, get_stock_and_price_data
+from app.models.stocks import Stock, STARTING_STOCKS, PORTFOLIO_STOCKS, get_stock_and_price_data
 from . import trading
 from .forms import ParamsOLS, ParamsSMA, ParamsMomentum, ParamsMeanReversion
 
@@ -10,14 +10,14 @@ from .forms import ParamsOLS, ParamsSMA, ParamsMomentum, ParamsMeanReversion
 @trading.route('/stocks')
 @login_required
 def stocks():
-    symbols = [x for x, _ in starting_stocks]
+    symbols = [x for x, _ in STARTING_STOCKS]
     stocks = Stock.query.filter(Stock.symbol.in_(symbols)).all()
     return render_template('trading/stocks.html', stocks=stocks, sample=False)
 
 
 @trading.route('/sample-stocks')
 def sample_stocks():
-    symbols = [x for x, _ in starting_stocks]
+    symbols = [x for x in PORTFOLIO_STOCKS]
     stocks = Stock.query.filter(Stock.symbol.in_(symbols)).all()
     return render_template('trading/stocks.html', stocks=stocks, sample=True)
 

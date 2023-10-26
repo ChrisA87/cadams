@@ -8,14 +8,24 @@ from .. import db
 from ..utils import to_json_safe
 
 
-starting_stocks = [
+STARTING_STOCKS = [
     ('AAPL', 'Apple, Inc.'),
     ('MSFT', 'Microsoft Corporation'),
     ('AMZN', 'Amazon.com, Inc.'),
     ('EURUSD=X', 'Euro / US Dollar Rate'),
     ('GDX', 'VanEck Gold Miners ETF'),
     ('GLD', 'SPDR Gold Trust'),
+    ('META', 'Meta Platforms, Inc.'),
+    ('CNA.L', 'Centrica plc'),
+    ('SONY', 'Sony Group Coropration'),
+    ('TTWO', 'Take-Two Interactive Software, Inc.'),
+    ('NFLX', 'Netflix, Inc.'),
+    ('SNOW', 'Snowflake Inc.'),
+    ('VUAG.L', 'Vanguard S&P 500 ETF')
 ]
+
+
+PORTFOLIO_STOCKS = ['META', 'CNA.L', 'AAPL', 'SONY', 'MSFT', 'TTWO', 'NFLXZ', 'SNOW', 'VUAG.L']
 
 
 def get_stock_and_price_data(symbol, duration=None):
@@ -39,7 +49,7 @@ class Stock(db.Model):
     last_updated = db.Column(db.DateTime())
 
     @staticmethod
-    def insert_stocks(stocks=starting_stocks):
+    def insert_stocks(stocks=STARTING_STOCKS):
         for symbol, name in stocks:
             stock = Stock.query.filter_by(symbol=symbol).first()
             if stock is None:

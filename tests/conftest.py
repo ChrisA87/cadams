@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from app import create_app, db
 from app.models.users import User
 from app.models.roles import Role
-from app.models.stocks import Stock, StockPrice, starting_stocks
+from app.models.stocks import Stock, StockPrice, STARTING_STOCKS
 
 
 @pytest.fixture
@@ -73,7 +73,7 @@ def test_db(app, list_users, list_stocks, list_stock_prices):
     db.session.add_all(list_stock_prices)
     db.session.commit()
     Role.insert_roles()
-    Stock.insert_stocks(starting_stocks)
+    Stock.insert_stocks(STARTING_STOCKS)
 
     yield db
 

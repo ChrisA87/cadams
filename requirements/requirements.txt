@@ -132,7 +132,7 @@ packaging==21.3
     #   bokeh
     #   gunicorn
     #   matplotlib
-pandas==2.1.1
+pandas==2.1.2
     # via
     #   -r requirements.in
     #   bokeh

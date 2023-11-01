@@ -16,8 +16,6 @@ attrs==22.2.0
     # via
     #   -c requirements.txt
     #   jsonschema
-backcall==0.2.0
-    # via ipython
 beautifulsoup4==4.11.2
     # via
     #   -c requirements.txt
@@ -73,7 +71,7 @@ ipykernel==6.13.0
     #   jupyter-console
     #   notebook
     #   qtconsole
-ipython==8.16.1
+ipython==8.17.2
     # via
     #   -r dev-requirements.in
     #   ipykernel
@@ -194,8 +192,6 @@ pandocfilters==1.5.0
 parso==0.8.3
     # via jedi
 pexpect==4.8.0
-    # via ipython
-pickleshare==0.7.5
     # via ipython
 pillow==10.1.0
     # via

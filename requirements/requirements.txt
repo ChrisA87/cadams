@@ -198,7 +198,7 @@ sqlalchemy==1.4.36
     #   flask-sqlalchemy
 starkbank-ecdsa==2.0.3
     # via sendgrid
-tornado==6.1
+tornado==6.3.3
     # via bokeh
 tqdm==4.65.0
     # via nltk

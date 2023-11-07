@@ -286,7 +286,7 @@ tomli==2.0.1
     #   pytest
 tomlkit==0.11.4
     # via pylint
-tornado==6.1
+tornado==6.3.3
     # via
     #   -c requirements.txt
     #   ipykernel

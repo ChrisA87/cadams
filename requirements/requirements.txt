@@ -147,11 +147,11 @@ pillow==10.1.0
     #   -r requirements.in
     #   bokeh
     #   matplotlib
-pydantic==2.4.2
+pydantic==2.5.1
     # via
     #   -r requirements.in
     #   pydantic-settings
-pydantic-core==2.10.1
+pydantic-core==2.14.3
     # via pydantic
 pydantic-settings==2.0.3
     # via -r requirements.in
@@ -226,5 +226,5 @@ wtforms==3.0.1
     #   flask-wtf
 xyzservices==2023.2.0
     # via bokeh
-yfinance==0.2.31
+yfinance==0.2.32
     # via -r requirements.in

@@ -71,7 +71,7 @@ ipykernel==6.13.0
     #   jupyter-console
     #   notebook
     #   qtconsole
-ipython==8.17.2
+ipython==8.18.1
     # via
     #   -r dev-requirements.in
     #   ipykernel
@@ -203,7 +203,7 @@ pluggy==1.0.0
     # via pytest
 prometheus-client==0.14.1
     # via notebook
-prompt-toolkit==3.0.38
+prompt-toolkit==3.0.41
     # via
     #   ipython
     #   jupyter-console

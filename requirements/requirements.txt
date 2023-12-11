@@ -54,7 +54,7 @@ flask==2.3.3
     #   flask-wtf
 flask-admin==1.6.1
     # via -r requirements.in
-flask-debugtoolbar==0.13.1
+flask-debugtoolbar==0.14.1
     # via -r requirements.in
 flask-login==0.6.3
     # via -r requirements.in
@@ -109,6 +109,7 @@ mako==1.2.2
     # via alembic
 markupsafe==2.1.1
     # via
+    #   flask-debugtoolbar
     #   jinja2
     #   mako
     #   werkzeug
@@ -130,6 +131,7 @@ numpy==1.26.2
 packaging==21.3
     # via
     #   bokeh
+    #   flask-debugtoolbar
     #   gunicorn
     #   matplotlib
 pandas==2.1.3

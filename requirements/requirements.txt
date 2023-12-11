@@ -228,5 +228,5 @@ wtforms==3.0.1
     #   flask-wtf
 xyzservices==2023.2.0
     # via bokeh
-yfinance==0.2.32
+yfinance==0.2.33
     # via -r requirements.in

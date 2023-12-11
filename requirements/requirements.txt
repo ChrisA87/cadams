@@ -134,7 +134,7 @@ packaging==21.3
     #   flask-debugtoolbar
     #   gunicorn
     #   matplotlib
-pandas==2.1.3
+pandas==2.1.4
     # via
     #   -r requirements.in
     #   bokeh

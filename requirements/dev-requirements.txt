@@ -227,7 +227,7 @@ pygments==2.15.0
     #   jupyter-console
     #   nbconvert
     #   qtconsole
-pylint==3.0.2
+pylint==3.0.3
     # via -r dev-requirements.in
 pyparsing==3.0.9
     # via

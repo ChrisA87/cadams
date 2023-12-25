@@ -149,11 +149,11 @@ pillow==10.1.0
     #   -r requirements.in
     #   bokeh
     #   matplotlib
-pydantic==2.5.2
+pydantic==2.5.3
     # via
     #   -r requirements.in
     #   pydantic-settings
-pydantic-core==2.14.5
+pydantic-core==2.14.6
     # via pydantic
 pydantic-settings==2.1.0
     # via -r requirements.in

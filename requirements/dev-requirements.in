@@ -1,7 +1,7 @@
 -c requirements.txt
 coverage
 flake8
-ipython~=8.18.1
+ipython~=8.19.0
 jupyter
 pylint
 pytest

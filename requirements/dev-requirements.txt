@@ -71,7 +71,7 @@ ipykernel==6.13.0
     #   jupyter-console
     #   notebook
     #   qtconsole
-ipython==8.18.1
+ipython==8.19.0
     # via
     #   -r dev-requirements.in
     #   ipykernel
@@ -238,7 +238,7 @@ pyrsistent==0.19.3
     # via
     #   -c requirements.txt
     #   jsonschema
-pytest==7.4.3
+pytest==7.4.4
     # via -r dev-requirements.in
 python-dateutil==2.8.2
     # via

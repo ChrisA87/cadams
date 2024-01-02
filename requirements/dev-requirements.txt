@@ -238,7 +238,7 @@ pyrsistent==0.19.3
     # via
     #   -c requirements.txt
     #   jsonschema
-pytest==7.4.3
+pytest==7.4.4
     # via -r dev-requirements.in
 python-dateutil==2.8.2
     # via

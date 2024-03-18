@@ -1,5 +1,5 @@
 bokeh~=3.3.2
-email_validator~=2.1.0
+email_validator~=2.1.1
 flask~=2.3.3
 flask-admin~=1.6.1
 flask-debugtoolbar~=0.14.1

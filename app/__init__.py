@@ -1,5 +1,4 @@
 from flask import Flask
-from flask_admin import Admin
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_debugtoolbar import DebugToolbarExtension
@@ -8,11 +7,11 @@ from config import config
 
 db = SQLAlchemy()
 login_manager = LoginManager()
-login_manager.login_view = 'auth.login'
+login_manager.login_view = "auth.login"
 toolbar = DebugToolbarExtension()
 
 
-def create_app(config_name='default'):
+def create_app(config_name="default"):
     from .auth import auth
     from .main import main
     from .trading import trading

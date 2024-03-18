@@ -12,7 +12,7 @@ class CustomAdminIndexView(AdminIndexView):
         return current_user.is_authenticated and current_user.role_id == 3
 
     def inaccessible_callback(self, name, **kwargs):
-        return redirect(url_for('auth.login'))
+        return redirect(url_for("auth.login"))
 
 
 class AdminModelView(ModelView):
@@ -20,12 +20,14 @@ class AdminModelView(ModelView):
         return current_user.is_authenticated and current_user.role_id == 3
 
     def inaccessible_callback(self, name, **kwargs):
-        return redirect(url_for('auth.login'))
+        return redirect(url_for("auth.login"))
 
 
-admin = Admin(template_mode='bootstrap3', index_view=CustomAdminIndexView(url='/auth/admin'))
+admin = Admin(
+    template_mode="bootstrap3", index_view=CustomAdminIndexView(url="/auth/admin")
+)
 admin.add_view(AdminModelView(users.User, db.session))
 admin.add_view(AdminModelView(roles.Role, db.session))
 admin.add_view(AdminModelView(stocks.Stock, db.session))
 admin.add_view(AdminModelView(stocks.StockPrice, db.session))
-admin.add_link(MenuLink('Back to site', url='/'))
+admin.add_link(MenuLink("Back to site", url="/"))

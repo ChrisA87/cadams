@@ -71,7 +71,7 @@ ipykernel==6.13.0
     #   jupyter-console
     #   notebook
     #   qtconsole
-ipython==8.20.0
+ipython==8.22.2
     # via
     #   -r dev-requirements.in
     #   ipykernel
@@ -199,7 +199,7 @@ pillow==10.2.0
     #   matplotlib
 platformdirs==2.5.2
     # via pylint
-pluggy==1.0.0
+pluggy==1.4.0
     # via pytest
 prometheus-client==0.14.1
     # via notebook
@@ -238,7 +238,7 @@ pyrsistent==0.19.3
     # via
     #   -c requirements.txt
     #   jsonschema
-pytest==7.4.4
+pytest==8.1.1
     # via -r dev-requirements.in
 python-dateutil==2.8.2
     # via
@@ -293,7 +293,7 @@ tornado==6.3.3
     #   jupyter-client
     #   notebook
     #   terminado
-traitlets==5.2.1.post0
+traitlets==5.14.2
     # via
     #   ipykernel
     #   ipython

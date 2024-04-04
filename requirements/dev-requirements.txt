@@ -71,7 +71,7 @@ ipykernel==6.13.0
     #   jupyter-console
     #   notebook
     #   qtconsole
-ipython==8.22.2
+ipython==8.23.0
     # via
     #   -r dev-requirements.in
     #   ipykernel
@@ -310,6 +310,7 @@ typing-extensions==4.7.1
     # via
     #   -c requirements.txt
     #   astroid
+    #   ipython
 tzdata==2023.3
     # via
     #   -c requirements.txt

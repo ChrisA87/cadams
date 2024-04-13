@@ -80,7 +80,7 @@ gunicorn==21.2.0
     # via -r requirements.in
 html5lib==1.1
     # via yfinance
-idna==3.3
+idna==3.7
     # via
     #   email-validator
     #   requests

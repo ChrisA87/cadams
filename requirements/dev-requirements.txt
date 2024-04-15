@@ -24,7 +24,7 @@ bleach==5.0.0
     # via nbconvert
 cffi==1.15.1
     # via argon2-cffi-bindings
-contourpy==1.0.7
+contourpy==1.2.1
     # via
     #   -c requirements.txt
     #   matplotlib
@@ -183,7 +183,7 @@ packaging==21.3
     #   nbconvert
     #   pytest
     #   qtpy
-pandas==2.1.4
+pandas==2.2.2
     # via
     #   -c requirements.txt
     #   seaborn

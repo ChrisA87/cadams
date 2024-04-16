@@ -3,19 +3,13 @@ from flask_restx import Namespace, Resource
 from app.models.stocks import Stock, StockPrice, get_stock_and_price_data
 from app.trading.strategy import SMA, Momentum, MeanReversion, OLS
 from .security import require_apikey, require_public_apikey, format_response
-from .models.trading import (
-    sma_params,
-    momentum_params,
-    mean_reversion_params,
-    ols_params,
-)
+from .models.trading import sma_params, momentum_params, mean_reversion_params, ols_params
 
 
 api = Namespace(
-    name="Trading",
-    description="Some endpoints for algorithmic trading.",
-    path="/trading",
-)
+    name='Trading',
+    description='Some endpoints for algorithmic trading.',
+    path='/trading')
 
 
 def get_strategy_suggestion(strategy, symbol, payload):
@@ -27,12 +21,11 @@ def get_strategy_suggestion(strategy, symbol, payload):
     date = datetime.date.today()
 
     return {
-        "strategy": strategy.__class__.__name__,
-        "symbol": stock.symbol,
-        "date": date.isoformat(),
-        "suggestion": suggestion,
-        "position": {strategy.short_pos: "short", 1: "long"}.get(position),
-    }
+        'strategy': strategy.__class__.__name__,
+        'symbol': stock.symbol,
+        'date': date.isoformat(),
+        'suggestion': suggestion,
+        'position': {strategy.short_pos: 'short', 1: 'long'}.get(position)}
 
 
 @api.route("/health")
@@ -42,28 +35,28 @@ class HealthChecks(Resource):
 
 
 @api.route("/stocks")
-@api.doc(security="apikey")
+@api.doc(security='apikey')
 class StocksList(Resource):
     @format_response
     @require_public_apikey
     def get(self):
-        return [stock.to_dict("last_updated") for stock in Stock.query.all()]
+        return [stock.to_dict('last_updated') for stock in Stock.query.all()]
 
 
 @api.route("/stock/<symbol>")
-@api.doc(security="apikey")
+@api.doc(security='apikey')
 class StockInfo(Resource):
     @format_response
     @require_apikey
     def get(self, symbol):
         stock = Stock.query.filter_by(symbol=symbol).first()
         if stock:
-            return stock.to_dict("last_updated")
-        return {"symbol": symbol, "result": "not found"}
+            return stock.to_dict('last_updated')
+        return {'symbol': symbol, 'result': 'not found'}
 
 
 @api.route("/stock-prices/<symbol>")
-@api.doc(security="apikey")
+@api.doc(security='apikey')
 class StockPrices(Resource):
     @format_response
     @require_apikey
@@ -71,11 +64,11 @@ class StockPrices(Resource):
         stock_prices = StockPrice.query.filter_by(symbol=symbol).all()
         if stock_prices:
             return [price.to_dict() for price in stock_prices]
-        return {"symbol": symbol, "result": "not found"}
+        return {'symbol': symbol, 'result': 'not found'}
 
 
 @api.route("/strategy/sma/<symbol>")
-@api.doc(security="apikey")
+@api.doc(security='apikey')
 class SMAStrategySuggestion(Resource):
     @format_response
     @require_public_apikey
@@ -85,7 +78,7 @@ class SMAStrategySuggestion(Resource):
 
 
 @api.route("/strategy/momentum/<symbol>")
-@api.doc(security="apikey")
+@api.doc(security='apikey')
 class MomentumStrategySuggestion(Resource):
     @format_response
     @require_public_apikey
@@ -95,7 +88,7 @@ class MomentumStrategySuggestion(Resource):
 
 
 @api.route("/strategy/mean-reversion/<symbol>")
-@api.doc(security="apikey")
+@api.doc(security='apikey')
 class MeanReversionStrategySuggestion(Resource):
     @format_response
     @require_public_apikey
@@ -105,7 +98,7 @@ class MeanReversionStrategySuggestion(Resource):
 
 
 @api.route("/strategy/ols/<symbol>")
-@api.doc(security="apikey")
+@api.doc(security='apikey')
 class OLSStrategySuggestion(Resource):
     @format_response
     @require_public_apikey

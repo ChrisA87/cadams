@@ -24,7 +24,7 @@ bleach==5.0.0
     # via nbconvert
 cffi==1.15.1
     # via argon2-cffi-bindings
-contourpy==1.0.7
+contourpy==1.2.1
     # via
     #   -c requirements.txt
     #   matplotlib
@@ -108,7 +108,7 @@ jupyter-client==7.3.1
     #   qtconsole
 jupyter-console==6.4.3
     # via jupyter
-jupyter-core==4.10.0
+jupyter-core==4.11.2
     # via
     #   jupyter-client
     #   nbconvert

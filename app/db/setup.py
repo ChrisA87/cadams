@@ -5,16 +5,16 @@ from app.models.roles import Role
 
 
 def main():
-    app = create_app(os.environ.get('FLASK_ENV', 'default'))
+    app = create_app(os.environ.get("FLASK_ENV", "default"))
     with app.app_context():
-        print('Inserting roles...', end=' ')
+        print("Inserting roles...", end=" ")
         Role.insert_roles()
-        print('Done\nInserting starter stocks...', end=' ')
+        print("Done\nInserting starter stocks...", end=" ")
         Stock.insert_stocks()
-        print('Done\nInserting stock prices...')
+        print("Done\nInserting stock prices...")
         StockPrice.update()
-        print('Done')
+        print("Done")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

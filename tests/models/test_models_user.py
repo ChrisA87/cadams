@@ -9,28 +9,28 @@ def test_cant_read_user_password(list_users):
 
 def test_password_setter(list_users):
     u1, *_ = list_users
-    u1.password = 'pa$$word!'
+    u1.password = "pa$$word!"
     assert u1.password_hash is not None
 
 
 def test_password_verification__correct(list_users):
     u1, u2, _ = list_users
-    u1.password = 'pa$$word!'
-    u2.password = 'secr3t'
-    assert u1.verify_password('pa$$word!')
-    assert u2.verify_password('secr3t')
+    u1.password = "pa$$word!"
+    u2.password = "secr3t"
+    assert u1.verify_password("pa$$word!")
+    assert u2.verify_password("secr3t")
 
 
 def test_password_verification__incorrect(list_users):
     u1, *_ = list_users
-    u1.password = 'pa$$word!'
-    assert not u1.verify_password('password!')
+    u1.password = "pa$$word!"
+    assert not u1.verify_password("password!")
 
 
 def test_password_salts_are_random(list_users):
     u1, u2, _ = list_users
-    u1.password = 'cat'
-    u2.password = 'cat'
+    u1.password = "cat"
+    u2.password = "cat"
     assert u1.password_hash != u2.password_hash
 
 
@@ -53,4 +53,4 @@ def test_confirm_exception(app, list_users):
 
 def test_user_repr(app, list_users):
     u1, *_ = list_users
-    assert u1.__repr__() == '<User john (1)>'
+    assert u1.__repr__() == "<User john (1)>"

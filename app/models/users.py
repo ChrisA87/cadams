@@ -6,19 +6,19 @@ from .. import db, login_manager
 
 
 class User(UserMixin, db.Model):
-    __tablename__ = 'users'
+    __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(64), unique=True, index=True)
     username = db.Column(db.String(64), unique=True, index=True)
     created = db.Column(db.DateTime())
     password_hash = db.Column(db.String(128))
-    role_id = db.Column(db.Integer, db.ForeignKey('roles.id'), default=1)
+    role_id = db.Column(db.Integer, db.ForeignKey("roles.id"), default=1)
     api_key = db.Column(db.String(64))
     confirmed = db.Column(db.Boolean, default=False)
 
     @property
     def password(self):
-        raise AttributeError('Password is not a readable field')
+        raise AttributeError("Password is not a readable field")
 
     @password.setter
     def password(self, password):
@@ -28,23 +28,23 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash, password)
 
     def generate_verify_token(self):
-        s = URLSafeSerializer(current_app.config['SECRET_KEY'], salt='verify')
-        return s.dumps({'confirm': self.id})
+        s = URLSafeSerializer(current_app.config["SECRET_KEY"], salt="verify")
+        return s.dumps({"confirm": self.id})
 
     def confirm(self, token):
-        s = URLSafeSerializer(current_app.config['SECRET_KEY'], salt='verify')
+        s = URLSafeSerializer(current_app.config["SECRET_KEY"], salt="verify")
         try:
             data = s.loads(token)
         except Exception:
             return False
-        if data.get('confirm') != self.id:
+        if data.get("confirm") != self.id:
             return False
         self.confirmed = True
         db.session.add(self)
         return True
 
     def __repr__(self):
-        return f'<User {self.username} ({self.id})>'
+        return f"<User {self.username} ({self.id})>"
 
 
 @login_manager.user_loader

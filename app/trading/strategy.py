@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 from bokeh.plotting import figure, ColumnDataSource
 from bokeh.models import DatetimeTickFormatter, NumeralTickFormatter, Span
 from bokeh.embed import components
+import pandas as pd
 from .errors import NotFittedError
 
 
@@ -26,9 +27,14 @@ class Strategy:
     def __init__(self, df, short_pos=0):
         if "date" not in df:
             raise KeyError('Expected a datetime column "date" in the input DataFrame.')
-        self.df = df.copy().set_index("date")
+        self.df = self._prepare_df(df)
         self._fit = False
         self.short_pos = short_pos
+
+    def _prepare_df(self, df):
+        result = df.copy()
+        result["date"] = pd.to_datetime(result["date"])
+        return result.set_index("date")
 
     def _dropna(self):
         self.df = self.df.dropna()

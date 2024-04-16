@@ -41,13 +41,10 @@ PORTFOLIO_STOCKS = [
 def get_stock_and_price_data(symbol, duration=None):
     duration = 10 if duration is None else int(duration)
     stock = Stock.query.filter_by(symbol=symbol).first_or_404()
-    start_date = datetime.today() - pd.Timedelta(days=365 * duration)
-    base_query = (
-        StockPrice.query.with_entities(StockPrice.date, StockPrice.adj_close)
-        .filter_by(symbol=symbol)
-        .filter(StockPrice.date >= start_date)
-    )
-    prices = pd.read_sql(base_query.statement, base_query.session.bind)
+    start_date = datetime.today() - timedelta(days=365 * duration)
+    query = f"SELECT date, adj_close FROM stock_prices WHERE symbol = '{stock.symbol}' AND date >= '{start_date}'"
+    conn = db.engine.connect().connection
+    prices = pd.read_sql(query, conn)
     return stock, prices
 
 

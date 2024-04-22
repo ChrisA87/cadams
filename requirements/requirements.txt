@@ -76,7 +76,7 @@ frozendict==2.3.5
     # via yfinance
 greenlet==2.0.2
     # via sqlalchemy
-gunicorn==21.2.0
+gunicorn==22.0.0
     # via -r requirements.in
 html5lib==1.1
     # via yfinance

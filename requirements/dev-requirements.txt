@@ -28,7 +28,7 @@ contourpy==1.2.1
     # via
     #   -c requirements.txt
     #   matplotlib
-coverage==7.4.4
+coverage==7.5.0
     # via -r dev-requirements.in
 cycler==0.11.0
     # via
@@ -71,7 +71,7 @@ ipykernel==6.13.0
     #   jupyter-console
     #   notebook
     #   qtconsole
-ipython==8.23.0
+ipython==8.24.0
     # via
     #   -r dev-requirements.in
     #   ipykernel

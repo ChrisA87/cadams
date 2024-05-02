@@ -199,7 +199,7 @@ pillow==10.3.0
     #   matplotlib
 platformdirs==2.5.2
     # via pylint
-pluggy==1.4.0
+pluggy==1.5.0
     # via pytest
 prometheus-client==0.14.1
     # via notebook
@@ -238,7 +238,7 @@ pyrsistent==0.19.3
     # via
     #   -c requirements.txt
     #   jsonschema
-pytest==8.1.1
+pytest==8.2.0
     # via -r dev-requirements.in
 python-dateutil==2.8.2
     # via

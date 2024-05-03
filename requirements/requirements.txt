@@ -202,7 +202,7 @@ starkbank-ecdsa==2.0.3
     # via sendgrid
 tornado==6.3.3
     # via bokeh
-tqdm==4.65.0
+tqdm==4.66.3
     # via nltk
 typing-extensions==4.7.1
     # via

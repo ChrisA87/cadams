@@ -112,7 +112,7 @@ markupsafe==2.1.1
     #   mako
     #   werkzeug
     #   wtforms
-matplotlib==3.8.4
+matplotlib==3.9.0
     # via -r requirements.in
 multitasking==0.0.11
     # via yfinance

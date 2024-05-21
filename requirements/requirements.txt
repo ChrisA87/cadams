@@ -182,7 +182,7 @@ pyyaml==6.0
     # via bokeh
 regex==2022.10.31
     # via nltk
-requests==2.31.0
+requests==2.32.0
     # via
     #   pandas-datareader
     #   yfinance

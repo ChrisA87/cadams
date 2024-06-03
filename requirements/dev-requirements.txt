@@ -28,7 +28,7 @@ contourpy==1.2.1
     # via
     #   -c requirements.txt
     #   matplotlib
-coverage==7.5.1
+coverage==7.5.3
     # via -r dev-requirements.in
 cycler==0.11.0
     # via
@@ -197,8 +197,10 @@ pillow==10.3.0
     # via
     #   -c requirements.txt
     #   matplotlib
-platformdirs==2.5.2
-    # via pylint
+platformdirs==4.2.2
+    # via
+    #   -c requirements.txt
+    #   pylint
 pluggy==1.5.0
     # via pytest
 prometheus-client==0.14.1

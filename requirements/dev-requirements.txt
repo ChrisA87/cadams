@@ -71,7 +71,7 @@ ipykernel==6.13.0
     #   jupyter-console
     #   notebook
     #   qtconsole
-ipython==8.24.0
+ipython==8.25.0
     # via
     #   -r dev-requirements.in
     #   ipykernel
@@ -197,8 +197,10 @@ pillow==10.3.0
     # via
     #   -c requirements.txt
     #   matplotlib
-platformdirs==2.5.2
-    # via pylint
+platformdirs==4.2.2
+    # via
+    #   -c requirements.txt
+    #   pylint
 pluggy==1.5.0
     # via pytest
 prometheus-client==0.14.1

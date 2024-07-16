@@ -149,11 +149,11 @@ pillow==10.4.0
     #   matplotlib
 platformdirs==4.2.2
     # via yfinance
-pydantic==2.7.4
+pydantic==2.8.2
     # via
     #   -r requirements.in
     #   pydantic-settings
-pydantic-core==2.18.4
+pydantic-core==2.20.1
     # via pydantic
 pydantic-settings==2.3.4
     # via -r requirements.in

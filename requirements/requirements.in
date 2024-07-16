@@ -1,4 +1,4 @@
-bokeh~=3.4.0
+bokeh~=3.5.0
 email_validator~=2.2.0
 flask~=2.3.3
 flask-admin~=1.6.1

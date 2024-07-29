@@ -19,7 +19,7 @@ blinker==1.6.2
     #   flask
     #   flask-debugtoolbar
     #   flask-mail
-bokeh==3.5.0
+bokeh==3.5.1
     # via -r requirements.in
 certifi==2024.7.4
     # via requests
